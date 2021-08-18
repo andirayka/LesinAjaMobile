@@ -3,6 +3,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Splash} from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthStack} from './AuthStack';
+import {ParentStack} from './ParentStack';
 
 const AppRouter: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,8 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      <AuthStack />
+      {/* <AuthStack /> */}
+      <ParentStack />
     </NavigationContainer>
   );
 };
