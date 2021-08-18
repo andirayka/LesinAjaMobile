@@ -19,9 +19,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.6",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.6",
+    "apisauce": "^2.1.1",
+    "dayjs": "^1.10.6",
     "react": "17.0.1",
+    "react-hook-form": "^7.12.2",
     "react-native": "0.64.1",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",
