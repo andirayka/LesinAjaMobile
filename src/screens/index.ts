@@ -1,2 +1,2 @@
-export * from './InitialLoader';
 export * from './Splash';
+export * from './LoginAdmin';

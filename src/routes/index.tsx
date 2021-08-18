@@ -1,9 +1,10 @@
 import {wait} from '@utils';
 import React, {FC, useEffect, useState} from 'react';
 import {Splash} from '@screens';
+import {NavigationContainer} from '@react-navigation/native';
+import {AuthStack} from './AuthStack';
 
-// When app is initially opened, check data and then load related screen
-export const InitialLoader: FC = () => {
+const AppRouter: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,6 +16,14 @@ export const InitialLoader: FC = () => {
 
   // When checking data, show splash screen
   if (isLoading) {
+    return <Splash />;
   }
-  return <Splash />;
+
+  return (
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
+  );
 };
+
+export default AppRouter;

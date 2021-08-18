@@ -1,14 +1,6 @@
 import React, {FC} from 'react';
-import {LogoAplikasi, LogoLesinAja} from '@assets';
-import {dimens} from '@constants';
-import {
-  Image,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {LogoLesinAja} from '@assets';
+import {Image, SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 import {Gap} from '@components';
 
 // Splash Screen for loading
@@ -41,19 +33,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  welcomeText: {
-    // color: color.purple_200,
-    fontSize: dimens.medium,
-    marginBottom: dimens.large,
-  },
-  textContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  appNameText: {
-    fontSize: dimens.standard,
-    marginLeft: dimens.small,
   },
 });
