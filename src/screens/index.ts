@@ -1,2 +1,3 @@
 export * from './Splash';
-export * from './LoginAdmin';
+export * from './AdminLogin';
+export * from './GeneralLogin';

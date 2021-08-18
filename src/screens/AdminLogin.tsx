@@ -3,7 +3,7 @@ import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {Text} from 'react-native-elements';
 
 // Login screen for Admin only
-export const LoginAdmin: FC = () => {
+export const AdminLogin: FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="white" />

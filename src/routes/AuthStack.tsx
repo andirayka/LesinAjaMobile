@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {LoginAdmin} from '@screens';
+import {AdminLogin, GeneralLogin} from '@screens';
 
 const Stack = createStackNavigator();
 
-export const AuthStack = () => {
+// Stack for auth flows
+export const AuthStack: FC = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="LoginAdmin" component={LoginAdmin} />
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="GeneralLogin" component={GeneralLogin} />
+      <Stack.Screen name="AdminLogin" component={AdminLogin} />
     </Stack.Navigator>
   );
 };
