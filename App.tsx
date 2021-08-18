@@ -4,11 +4,13 @@ import 'react-native-gesture-handler';
 import React, {FC} from 'react';
 // import {InitialLoader} from '@screens';
 import {enableScreens} from 'react-native-screens';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 // to indicate that inactive screens should be detached from the view hierarchy to save memory
 enableScreens();
 
 const App: FC = () => {
+  return <SafeAreaProvider></SafeAreaProvider>;
   // return <InitialLoader />;
 };
 
