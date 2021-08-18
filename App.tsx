@@ -2,7 +2,7 @@
 import 'react-native-gesture-handler';
 
 import React, {FC} from 'react';
-// import {InitialLoader} from '@screens';
+import {InitialLoader} from '@screens';
 import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -10,7 +10,11 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 enableScreens();
 
 const App: FC = () => {
-  return <SafeAreaProvider></SafeAreaProvider>;
+  return (
+    <SafeAreaProvider>
+      <InitialLoader />
+    </SafeAreaProvider>
+  );
   // return <InitialLoader />;
 };
 
