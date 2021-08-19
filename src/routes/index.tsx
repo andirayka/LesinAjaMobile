@@ -1,19 +1,26 @@
-import {wait} from '@utils';
-import React, {FC, useEffect, useState} from 'react';
-import {Splash} from '@screens';
+import React, {FC, useContext, useEffect, useState} from 'react';
+import {AdminLogin, GeneralLogin, Home, Splash} from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthStack} from './AuthStack';
-import {ParentStack} from './ParentStack';
+import {createStackNavigator} from '@react-navigation/stack';
+import {getLocalStorage} from '@utils';
+import {localStorageKey} from '@constants';
+import {AuthContext} from '@context/AuthContext';
 
+const Stack = createStackNavigator();
+// Main router fo the App
 const AppRouter: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const {userToken, setUserToken} = useContext(AuthContext);
 
   useEffect(() => {
     // Check data
-    wait(1000).then(() => {
+    getLocalStorage(localStorageKey.userToken).then(res => {
+      if (!res) {
+        // setUserToken('coba');
+      }
       setIsLoading(false);
     });
-  }, []);
+  }, [userToken]);
 
   // When checking data, show splash screen
   if (isLoading) {
@@ -22,8 +29,16 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      {/* <AuthStack /> */}
-      <ParentStack />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <>
+          <Stack.Screen name="GeneralLogin" component={GeneralLogin} />
+          <Stack.Screen name="AdminLogin" component={AdminLogin} />
+        </>
+
+        <>
+          <Stack.Screen name="Home" component={Home} />
+        </>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

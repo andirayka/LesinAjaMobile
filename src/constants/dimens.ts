@@ -1,3 +1,4 @@
+// Dimensions
 export const dimens = {
   tiny: 4,
   tiny_6: 6,

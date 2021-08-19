@@ -5,6 +5,7 @@ import React, {FC} from 'react';
 import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppRouter from '@routes';
+import AppContextProvider from '@context';
 
 // to indicate that inactive screens should be detached from the view hierarchy to save memory
 enableScreens();
@@ -12,7 +13,9 @@ enableScreens();
 const App: FC = () => {
   return (
     <SafeAreaProvider>
-      <AppRouter />
+      <AppContextProvider>
+        <AppRouter />
+      </AppContextProvider>
     </SafeAreaProvider>
   );
 };
