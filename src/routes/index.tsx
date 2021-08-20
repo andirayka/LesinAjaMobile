@@ -40,7 +40,7 @@ const AppRouter: FC = () => {
       )}
       {/* Parent Tabs */}
       {userRole === 'parent' && (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName="Account">
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Les" component={Les} />
           <Tab.Screen name="Account" component={Account} />
