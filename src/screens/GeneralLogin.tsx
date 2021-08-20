@@ -16,6 +16,7 @@ export const GeneralLogin: FC<ScreenType> = ({navigation}) => {
       <StatusBar backgroundColor="white" />
 
       <Button
+        contentStyle={{padding: 30}}
         onPress={() => {
           loginParent();
         }}>
@@ -23,6 +24,7 @@ export const GeneralLogin: FC<ScreenType> = ({navigation}) => {
       </Button>
 
       <Button
+        contentStyle={{padding: 30}}
         onPress={() => {
           navigation.navigate('AdminLogin');
         }}>

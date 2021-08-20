@@ -1,5 +1,5 @@
 import {localStorageKey} from '@constants';
-import {setLocalStorage} from '@utils';
+import {clearLocalStorage, setLocalStorage} from '@utils';
 import React, {createContext, useEffect, useReducer} from 'react';
 import {FC} from 'react';
 
@@ -45,19 +45,20 @@ export const AuthProvider: FC = ({children}) => {
 
   const loginParent = async () => {
     await setLocalStorage(localStorageKey.userRole, 'parent');
-    setUserRole('parent');
+    dispatch({type: 'SET_USER_ROLE', userRole: 'parent'});
   };
 
   const setUserRole = (value: string) => {
     dispatch({type: 'SET_USER_ROLE', userRole: value});
   };
 
-  // * Fungsi untuk logout
-  // panggil firebase logout, lalu navigate ke login
-  // const logout = async () => {};
+  const logout = async () => {
+    await clearLocalStorage();
+    setUserRole('');
+  };
 
   return (
-    <AuthContext.Provider value={{...state, setUserRole, loginParent}}>
+    <AuthContext.Provider value={{...state, setUserRole, loginParent, logout}}>
       {children}
     </AuthContext.Provider>
   );

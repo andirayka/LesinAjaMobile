@@ -30,7 +30,7 @@ const AppRouter: FC = () => {
       }
       setIsLoading(false);
     });
-  }, [userRole]);
+  }, []);
 
   // When checking data, show splash screen
   if (isLoading) {
