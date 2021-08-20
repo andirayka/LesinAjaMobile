@@ -1,12 +1,14 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
-import {AdminLogin, GeneralLogin, Home, Splash} from '@screens';
+import {Account, AdminLogin, GeneralLogin, Home, Les, Splash} from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {clearLocalStorage, getLocalStorage} from '@utils';
 import {localStorageKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 // Main router fo the App
 const AppRouter: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,22 +31,21 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        {/* Authentication Stack */}
-        {!userRole && (
-          <>
-            <Stack.Screen name="GeneralLogin" component={GeneralLogin} />
-            <Stack.Screen name="AdminLogin" component={AdminLogin} />
-          </>
-        )}
-
-        {/* Parent Stack */}
-        {userRole === 'parent' && (
-          <>
-            <Stack.Screen name="Home" component={Home} />
-          </>
-        )}
-      </Stack.Navigator>
+      {/* Authentication Stack */}
+      {!userRole && (
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="GeneralLogin" component={GeneralLogin} />
+          <Stack.Screen name="AdminLogin" component={AdminLogin} />
+        </Stack.Navigator>
+      )}
+      {/* Parent Tabs */}
+      {userRole === 'parent' && (
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Les" component={Les} />
+          <Tab.Screen name="Account" component={Account} />
+        </Tab.Navigator>
+      )}
     </NavigationContainer>
   );
 };

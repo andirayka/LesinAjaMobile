@@ -2,6 +2,7 @@ import React, {FC, useContext} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {AuthContext} from '@context/AuthContext';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Button} from 'react-native-paper';
 
 type ScreenType = {
   navigation: any;
@@ -14,21 +15,19 @@ export const GeneralLogin: FC<ScreenType> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="white" />
 
-      {/* <Button
-        containerStyle={{marginTop: 50}}
-        title="LOGIN WALI MURID"
+      <Button
         onPress={() => {
           loginParent();
-        }}
-      />
+        }}>
+        LOGIN WALI MURID
+      </Button>
 
       <Button
-        containerStyle={{marginTop: 50}}
-        title="MASUK LOGIN ADMIN"
         onPress={() => {
           navigation.navigate('AdminLogin');
-        }}
-      /> */}
+        }}>
+        MASUK LOGIN ADMIN
+      </Button>
     </SafeAreaView>
   );
 };
