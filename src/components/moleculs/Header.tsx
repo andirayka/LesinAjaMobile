@@ -6,13 +6,15 @@ import {Appbar} from 'react-native-paper';
 
 type Props = {
   title: string;
+  noBackButton?: boolean;
 };
-export const Header: FC<Props> = ({title}) => {
+export const Header: FC<Props> = ({title, noBackButton}) => {
   const navigation = useNavigation();
 
   return (
     <Appbar.Header style={styles.container}>
-      <Appbar.BackAction onPress={navigation.goBack} />
+      {!noBackButton && <Appbar.BackAction onPress={navigation.goBack} />}
+
       <Appbar.Content title={title} titleStyle={{color: color.btn_black}} />
       {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
       {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}

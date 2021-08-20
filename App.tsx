@@ -4,7 +4,7 @@ import 'react-native-gesture-handler';
 import React, {FC} from 'react';
 import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Provider as PaperProvider} from 'react-native-paper';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import AppRouter from '@routes';
 import AppContextProvider from '@context';
 
@@ -15,7 +15,11 @@ const App: FC = () => {
   return (
     <SafeAreaProvider>
       <AppContextProvider>
-        <PaperProvider>
+        <PaperProvider
+          theme={{
+            ...DefaultTheme,
+            colors: {...DefaultTheme.colors, primary: '#10B981'},
+          }}>
           <AppRouter />
         </PaperProvider>
       </AppContextProvider>
