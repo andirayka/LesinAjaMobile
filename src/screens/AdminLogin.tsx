@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import {Text} from 'react-native-elements';
 
 // Login screen for Admin only
 export const AdminLogin: FC = () => {
