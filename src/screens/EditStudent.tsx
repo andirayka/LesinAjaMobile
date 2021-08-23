@@ -36,7 +36,7 @@ export const EditStudent: FC<Props> = ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Ubah Data Siswa" />
+      <Header title={`${item.nama ? 'Ubah' : 'Tambah'} Data Siswa`} />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>

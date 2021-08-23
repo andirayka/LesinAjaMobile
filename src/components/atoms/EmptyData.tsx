@@ -10,7 +10,7 @@ export const EmptyData: FC<Props> = () => {
     <View style={styles.container}>
       <MaterialCommunityIcons
         name="database-remove"
-        size={150}
+        size={130}
         style={{color: 'grey'}}
       />
 

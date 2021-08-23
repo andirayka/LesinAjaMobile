@@ -20,6 +20,7 @@ import {
 import {
   Button,
   Card,
+  Chip,
   FAB,
   Paragraph,
   Text,
@@ -31,11 +32,12 @@ import dayjs from 'dayjs';
 type LesType = {
   namaLes: string;
   totalPertemuan: number;
-  pertemuanSelesai: number;
-  tglMulai: number;
-  tglSelesai: number;
   siswa: string;
-  tutor: string;
+  pertemuanSelesai: number | null;
+  tglMulai: number | null;
+  tglSelesai: number | null;
+  tutor: string | null;
+  sudahBayar: boolean;
 };
 
 const lesItems: LesType[] = [
@@ -47,24 +49,27 @@ const lesItems: LesType[] = [
     tglSelesai: 1631403073,
     siswa: 'Andi Rayka',
     tutor: 'Udin Harun',
+    sudahBayar: true,
   },
   {
-    namaLes: 'Mengaji TK A',
-    totalPertemuan: 8,
-    pertemuanSelesai: 6,
-    tglMulai: 1629698756,
-    tglSelesai: 1631403073,
+    namaLes: 'Mengaji TK B',
+    totalPertemuan: 12,
+    pertemuanSelesai: null,
+    tglMulai: null,
+    tglSelesai: null,
     siswa: 'Andi Rayka',
-    tutor: 'Udin Harun',
+    tutor: null,
+    sudahBayar: false,
   },
   {
-    namaLes: 'Mengaji TK A',
-    totalPertemuan: 8,
-    pertemuanSelesai: 6,
-    tglMulai: 1629698756,
-    tglSelesai: 1631403073,
+    namaLes: 'Mengaji 1 SD',
+    totalPertemuan: 4,
+    pertemuanSelesai: null,
+    tglMulai: null,
+    tglSelesai: null,
     siswa: 'Andi Rayka',
     tutor: 'Udin Harun',
+    sudahBayar: false,
   },
 ];
 
@@ -122,21 +127,55 @@ const StudentItem: FC<{item: LesType; onPress: () => void}> = ({
   item,
   onPress,
 }) => {
-  const tglMulai = dayjs.unix(item.tglMulai).format('DD MMMM YYYY');
-  const tglSelesai = dayjs.unix(item.tglSelesai).format('DD MMMM YYYY');
+  const tglMulai =
+    item.tglMulai && dayjs.unix(item.tglMulai).format('DD MMMM YYYY');
+  const tglSelesai =
+    item.tglSelesai && dayjs.unix(item.tglSelesai).format('DD MMMM YYYY');
+  const jmlhPertemuanSelesai = item.pertemuanSelesai
+    ? `${item.pertemuanSelesai}/`
+    : '';
 
   return (
     <Card style={{marginTop: dimens.standard}} onPress={onPress}>
       <Card.Title
         title={item.namaLes}
-        subtitle={`${item.pertemuanSelesai}/${item.totalPertemuan} Pertemuan`}
+        subtitle={`${jmlhPertemuanSelesai}${item.totalPertemuan} Pertemuan`}
       />
 
       <Card.Content>
         <CardKeyValue keyName="Siswa" value={item.siswa} />
-        <CardKeyValue keyName="Tutor" value={item.tutor} />
-        <CardKeyValue keyName="Tgl Mulai" value={tglMulai} />
-        <CardKeyValue keyName="Tgl Selesai" value={tglSelesai} />
+        {item.tutor && <CardKeyValue keyName="Tutor" value={item.tutor} />}
+        {tglMulai && tglSelesai && (
+          <>
+            <CardKeyValue keyName="Tgl Mulai" value={tglMulai} />
+            <CardKeyValue keyName="Tgl Selesai" value={tglSelesai} />
+          </>
+        )}
+
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          {!item.tutor && (
+            <Chip
+              icon="cash-multiple"
+              style={{
+                marginTop: dimens.small,
+                marginRight: dimens.small,
+                backgroundColor: '#FBBF24',
+              }}>
+              Belum pilih tutor
+            </Chip>
+          )}
+          {item.tutor && !item.sudahBayar && (
+            <Chip
+              icon="cash-multiple"
+              style={{
+                marginTop: dimens.small,
+                marginRight: dimens.small,
+                backgroundColor: '#F87171',
+              }}>
+              Belum bayar les
+            </Chip>
+          )}
+        </View>
       </Card.Content>
     </Card>
   );
