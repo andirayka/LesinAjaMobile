@@ -1,6 +1,11 @@
 // react-native-gesture-handler should be at the top and there's nothing else before it
 import 'react-native-gesture-handler';
 
+// Global Settings
+import 'dayjs/locale/id';
+import dayjs from 'dayjs';
+dayjs.locale('id');
+
 import React, {FC} from 'react';
 import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

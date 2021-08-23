@@ -1,5 +1,12 @@
-import React, {FC} from 'react';
-import {ButtonFormSubmit, FABList, Gap, Header} from '@components';
+import React, {FC, useState} from 'react';
+import {
+  CardKeyValue,
+  EmptyData,
+  FABList,
+  Gap,
+  Header,
+  OneLineInfo,
+} from '@components';
 import {color, dimens} from '@constants';
 import {
   SafeAreaView,
@@ -8,7 +15,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Card, FAB, Paragraph, Subheading, Title} from 'react-native-paper';
+import {Card, Subheading} from 'react-native-paper';
 
 type StudentType = {
   nama: string;
@@ -16,7 +23,8 @@ type StudentType = {
   sekolah: string;
 };
 
-const studentItems = [
+const studentItems: StudentType[] = [
+  {nama: 'Andi Rayka', kelas: '1 SD', sekolah: 'SDN 1 Buduran'},
   {nama: 'Andi Rayka', kelas: '1 SD', sekolah: 'SDN 1 Buduran'},
   {nama: 'Andi Rayka', kelas: '1 SD', sekolah: 'SDN 1 Buduran'},
   {nama: 'Andi Rayka', kelas: '1 SD', sekolah: 'SDN 1 Buduran'},
@@ -31,6 +39,8 @@ type Props = {
   navigation: any;
 };
 export const ListStudents: FC<Props> = ({navigation}) => {
+  const [isEmptyData, setIsEmptyData] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
@@ -40,22 +50,25 @@ export const ListStudents: FC<Props> = ({navigation}) => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View
           style={{flex: 1, padding: dimens.standard, paddingTop: dimens.small}}>
-          <Subheading>
-            <Subheading style={{fontWeight: 'bold'}}>Info:</Subheading> Klik
-            item siswa untuk mengubah data
-          </Subheading>
+          {isEmptyData ? (
+            <EmptyData />
+          ) : (
+            <>
+              <OneLineInfo info="Klik item untuk mengubah data" />
 
-          {studentItems.map((item, index) => {
-            return (
-              <StudentItem
-                item={item}
-                onPress={() => {
-                  navigation.navigate('EditStudent', {item});
-                }}
-                key={index}
-              />
-            );
-          })}
+              {studentItems.map((item, index) => {
+                return (
+                  <StudentItem
+                    item={item}
+                    onPress={() => {
+                      navigation.navigate('EditStudent', {item});
+                    }}
+                    key={index}
+                  />
+                );
+              })}
+            </>
+          )}
         </View>
 
         <Gap y={72} />
@@ -78,28 +91,12 @@ const StudentItem: FC<{item: StudentType; onPress: () => void}> = ({
 }) => {
   return (
     <Card style={{marginTop: dimens.standard}} onPress={onPress}>
+      <Card.Title title={item.nama} />
       <Card.Content>
-        <Title>{item.nama}</Title>
         <CardKeyValue keyName="Jenjang Kelas" value={item.kelas} />
         <CardKeyValue keyName="Sekolah" value={item.sekolah} />
       </Card.Content>
     </Card>
-  );
-};
-
-const CardKeyValue: FC<{keyName: string; value: string}> = ({
-  keyName,
-  value,
-}) => {
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <Paragraph style={{flex: 3, fontSize: dimens.standard}}>
-        {keyName}
-      </Paragraph>
-      <Paragraph style={{flex: 5, fontSize: dimens.standard}}>
-        : {value}
-      </Paragraph>
-    </View>
   );
 };
 
