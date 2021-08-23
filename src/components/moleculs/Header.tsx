@@ -7,8 +7,15 @@ import {Appbar} from 'react-native-paper';
 type Props = {
   title: string;
   noBackButton?: boolean;
+  withFilter?: boolean;
+  onPressFilter?: () => void;
 };
-export const Header: FC<Props> = ({title, noBackButton}) => {
+export const Header: FC<Props> = ({
+  title,
+  noBackButton,
+  withFilter,
+  onPressFilter,
+}) => {
   const navigation = useNavigation();
 
   return (
@@ -16,8 +23,10 @@ export const Header: FC<Props> = ({title, noBackButton}) => {
       {!noBackButton && <Appbar.BackAction onPress={navigation.goBack} />}
 
       <Appbar.Content title={title} titleStyle={{color: color.btn_black}} />
-      {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-      {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
+
+      {withFilter && (
+        <Appbar.Action icon="filter-outline" onPress={onPressFilter} />
+      )}
     </Appbar.Header>
   );
 };

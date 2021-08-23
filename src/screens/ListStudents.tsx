@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ButtonFormSubmit, Header} from '@components';
+import {ButtonFormSubmit, FABList, Gap, Header} from '@components';
 import {color, dimens} from '@constants';
 import {
   SafeAreaView,
@@ -8,7 +8,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Card, Paragraph, Subheading, Title} from 'react-native-paper';
+import {Card, FAB, Paragraph, Subheading, Title} from 'react-native-paper';
 
 type StudentType = {
   nama: string;
@@ -57,11 +57,13 @@ export const ListStudents: FC<Props> = ({navigation}) => {
             );
           })}
         </View>
+
+        <Gap y={72} />
       </ScrollView>
 
       {/* Add button */}
-      <ButtonFormSubmit
-        text="Tambah Siswa Baru"
+      <FABList
+        label="Tambah Siswa Baru"
         onPress={() => {
           navigation.navigate('EditStudent');
         }}

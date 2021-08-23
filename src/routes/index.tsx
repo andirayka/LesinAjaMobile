@@ -66,7 +66,7 @@ const AppRouter: FC = () => {
 const MainTabs: FC<any> = ({props}) => {
   return (
     <Tab.Navigator
-      initialRouteName="SettingsStack"
+      initialRouteName="Les"
       barStyle={{backgroundColor: '#FCD34D'}}>
       <Tab.Screen
         name="Home"

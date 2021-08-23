@@ -7,8 +7,6 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
