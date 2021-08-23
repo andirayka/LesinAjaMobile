@@ -7,11 +7,8 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
-import {Button, HelperText, Text, TextInput, Title} from 'react-native-paper';
 
 type FormDataType = {
   nama: string;

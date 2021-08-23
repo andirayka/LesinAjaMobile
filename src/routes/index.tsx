@@ -49,63 +49,60 @@ const AppRouter: FC = () => {
           <Stack.Screen name="AdminLogin" component={AdminLogin} />
         </Stack.Navigator>
       )}
+
       {/* Parent Tabs */}
       {userRole === 'parent' && (
-        <Tab.Navigator
-          initialRouteName="SettingsStack"
-          barStyle={{backgroundColor: '#FCD34D'}}>
-          <Tab.Screen
-            name="Home"
-            component={Home}
-            options={{
-              tabBarLabel: 'Beranda',
-              tabBarIcon: ({color}) => (
-                <MaterialCommunityIcons name="home" color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Les"
-            component={Les}
-            options={{
-              tabBarLabel: 'Les',
-              tabBarIcon: ({color}) => (
-                <MaterialCommunityIcons
-                  name="book-open-variant"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="SettingsStack"
-            component={SettingsStack}
-            options={{
-              tabBarLabel: 'Akun',
-              tabBarIcon: ({color}) => (
-                <MaterialCommunityIcons
-                  name="account"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="MainTabs" component={MainTabs} />
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="ListStudents" component={ListStudents} />
+          <Stack.Screen name="EditStudent" component={EditStudent} />
+        </Stack.Navigator>
       )}
     </NavigationContainer>
   );
 };
 
-const SettingsStack: FC<any> = ({props}) => {
+const MainTabs: FC<any> = ({props}) => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="ListStudents" component={ListStudents} />
-      <Stack.Screen name="EditStudent" component={EditStudent} />
-    </Stack.Navigator>
+    <Tab.Navigator
+      initialRouteName="SettingsStack"
+      barStyle={{backgroundColor: '#FCD34D'}}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Beranda',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Les"
+        component={Les}
+        options={{
+          tabBarLabel: 'Les',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons
+              name="book-open-variant"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: 'Akun',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
