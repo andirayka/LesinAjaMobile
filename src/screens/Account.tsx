@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ButtonFormSubmit, Header} from '@components';
+import {ButtonFormSubmit, Header, InputText} from '@components';
 import {color, dimens} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
 import {
@@ -11,12 +11,18 @@ import {
 } from 'react-native';
 import {Text, TextInput} from 'react-native-paper';
 
+type FormDataType = {
+  nama: string;
+  noWa: string;
+  alamat: string;
+  pekerjaan: string;
+};
 export const Account: FC = () => {
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm({mode: 'onChange'});
+  } = useForm<FormDataType>({mode: 'onChange'});
 
   const onSubmit = async (data: object) => {
     console.log(data);
@@ -29,80 +35,80 @@ export const Account: FC = () => {
       <Header title="Ubah Data Akun" />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{flex: 1, paddingHorizontal: dimens.standard}}>
+        <View style={{flex: 1, padding: dimens.standard}}>
           <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
+              <InputText
+                autoCapitalize="words"
                 label="Nama"
                 placeholder="Masukkan nama lengkap Anda"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                style={styles.textInputStyle}
-                error={errors.nama}
+                error={!!errors.nama}
+                errorMessage="Nama harus diisi"
               />
             )}
             name="nama"
             defaultValue=""
           />
-          {errors.nama && <Text>Nama harus diisi.</Text>}
 
           <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
+              <InputText
                 label="Nomor WhatsApp"
+                placeholder="Masukkan nomor WhatsApp Anda"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                style={styles.textInputStyle}
-                error={errors.waNumber}
+                error={!!errors.noWa}
+                errorMessage="Nomor WhatsApp harus diisi"
                 keyboardType="phone-pad"
               />
             )}
-            name="waNumber"
+            name="noWa"
             defaultValue=""
           />
-          {errors.waNumber && <Text>Nomor WhatsApp harus diisi.</Text>}
 
           <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-                label="Alamat rumah"
+              <InputText
+                label="Alamat Rumah"
+                placeholder="Masukkan alamat rumah Anda"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                style={styles.textInputStyle}
-                error={errors.alamat}
+                error={!!errors.alamat}
+                errorMessage="Alamat rumah harus diisi"
               />
             )}
             name="alamat"
             defaultValue=""
           />
-          {errors.alamat && <Text>Alamat rumah harus diisi.</Text>}
 
           <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
+              <InputText
                 label="Pekerjaan"
+                placeholder="Masukkan pekerjaan Anda"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                style={styles.textInputStyle}
-                error={errors.pekerjaan}
+                error={!!errors.pekerjaan}
+                errorMessage="Pekerjaan harus diisi"
               />
             )}
             name="pekerjaan"
             defaultValue=""
           />
-          {errors.pekerjaan && <Text>Pekerjaan harus diisi.</Text>}
         </View>
       </ScrollView>
 

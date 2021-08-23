@@ -47,6 +47,7 @@ export const EditStudent: FC<Props> = ({navigation, route}) => {
             render={({field: {onChange, onBlur, value}}) => (
               <InputText
                 autoCapitalize="words"
+                placeholder="Masukkan nama lengkap Siswa"
                 label="Nama"
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -66,6 +67,7 @@ export const EditStudent: FC<Props> = ({navigation, route}) => {
               <InputText
                 autoCapitalize="words"
                 label="Asal Sekolah"
+                placeholder="Masukkan nama sekolah siswa"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
