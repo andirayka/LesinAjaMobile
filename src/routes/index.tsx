@@ -2,9 +2,11 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {
   Account,
   AdminLogin,
+  EditStudent,
   GeneralLogin,
   Home,
   Les,
+  ListStudents,
   Settings,
   Splash,
 } from '@screens';
@@ -14,6 +16,7 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {getLocalStorage} from '@utils';
 import {localStorageKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -48,10 +51,47 @@ const AppRouter: FC = () => {
       )}
       {/* Parent Tabs */}
       {userRole === 'parent' && (
-        <Tab.Navigator initialRouteName="SettingsStack">
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Les" component={Les} />
-          <Tab.Screen name="SettingsStack" component={SettingsStack} />
+        <Tab.Navigator
+          initialRouteName="SettingsStack"
+          barStyle={{backgroundColor: '#FCD34D'}}>
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{
+              tabBarLabel: 'Beranda',
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name="home" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Les"
+            component={Les}
+            options={{
+              tabBarLabel: 'Les',
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons
+                  name="book-open-variant"
+                  color={color}
+                  size={26}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="SettingsStack"
+            component={SettingsStack}
+            options={{
+              tabBarLabel: 'Akun',
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons
+                  name="account"
+                  color={color}
+                  size={26}
+                />
+              ),
+            }}
+          />
         </Tab.Navigator>
       )}
     </NavigationContainer>
@@ -63,6 +103,8 @@ const SettingsStack: FC<any> = ({props}) => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="ListStudents" component={ListStudents} />
+      <Stack.Screen name="EditStudent" component={EditStudent} />
     </Stack.Navigator>
   );
 };

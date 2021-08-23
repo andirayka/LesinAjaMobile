@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Header} from '@components';
+import {ButtonFormSubmit, Header} from '@components';
 import {color, dimens} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
 import {
@@ -7,20 +7,20 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {Text, TextInput} from 'react-native-paper';
 
 export const Account: FC = () => {
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+  } = useForm({mode: 'onChange'});
 
-  const onSubmit = async (data: object) => {};
+  const onSubmit = async (data: object) => {
+    console.log(data);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,12 +28,8 @@ export const Account: FC = () => {
 
       <Header title="Ubah Data Akun" />
 
-      <ScrollView contentContainerStyle={{flex: 1}}>
-        <View
-          style={{
-            flex: 1,
-            paddingHorizontal: dimens.standard,
-          }}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={{flex: 1, paddingHorizontal: dimens.standard}}>
           <Controller
             control={control}
             rules={{required: true}}
@@ -111,27 +107,7 @@ export const Account: FC = () => {
       </ScrollView>
 
       {/* Submit button */}
-      <KeyboardAvoidingView
-        behavior={Platform.select({ios: 'padding', android: 'height'})}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            height: 68,
-            justifyContent: 'center',
-            paddingHorizontal: dimens.standard,
-          }}>
-          <Button
-            contentStyle={{
-              borderRadius: dimens.standard,
-              backgroundColor: color.btn_black,
-              height: 48,
-            }}
-            labelStyle={{color: color.btn_white_2}}
-            onPress={handleSubmit(onSubmit)}>
-            Simpan
-          </Button>
-        </View>
-      </KeyboardAvoidingView>
+      <ButtonFormSubmit text="Simpan" onPress={handleSubmit(onSubmit)} />
     </SafeAreaView>
   );
 };

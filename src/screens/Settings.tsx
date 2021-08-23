@@ -20,7 +20,7 @@ export const Settings: FC<{navigation: any}> = ({navigation}) => {
 
       <Header noBackButton title="Pengaturan" />
 
-      <ScrollView contentContainerStyle={{flex: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1}}>
           <Button
             contentStyle={styles.settingsItem}
@@ -34,7 +34,7 @@ export const Settings: FC<{navigation: any}> = ({navigation}) => {
             contentStyle={styles.settingsItem}
             labelStyle={styles.settingsText}
             onPress={() => {
-              navigation.navigate('Account');
+              navigation.navigate('ListStudents');
             }}>
             Daftar Siswa
           </Button>
