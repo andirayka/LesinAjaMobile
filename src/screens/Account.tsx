@@ -9,7 +9,8 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Text, TextInput} from 'react-native-paper';
+import {StackScreenProps} from '@react-navigation/stack';
+import {AppStackParamList} from '@routes/RouteTypes';
 
 type FormDataType = {
   nama: string;
@@ -17,7 +18,10 @@ type FormDataType = {
   alamat: string;
   pekerjaan: string;
 };
-export const Account: FC = () => {
+
+type ScreenProps = StackScreenProps<AppStackParamList, 'Account'>;
+
+export const Account: FC<ScreenProps> = () => {
   const {
     control,
     handleSubmit,

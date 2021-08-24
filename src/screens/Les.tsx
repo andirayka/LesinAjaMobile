@@ -28,6 +28,10 @@ import {
   Title,
 } from 'react-native-paper';
 import dayjs from 'dayjs';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
+import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
+import {StackScreenProps} from '@react-navigation/stack';
 
 type LesType = {
   namaLes: string;
@@ -73,10 +77,11 @@ const lesItems: LesType[] = [
   },
 ];
 
-type Props = {
-  navigation: any;
-};
-export const Les: FC<Props> = ({navigation}) => {
+type ScreenProps = CompositeScreenProps<
+  MaterialBottomTabScreenProps<MainTabParamList, 'Settings'>,
+  StackScreenProps<AppStackParamList>
+>;
+export const Les: FC<ScreenProps> = ({navigation}) => {
   const [isEmptyData, setisEmptyData] = useState(false);
 
   return (

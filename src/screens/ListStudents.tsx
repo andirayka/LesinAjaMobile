@@ -15,7 +15,9 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Card, Subheading} from 'react-native-paper';
+import {Card} from 'react-native-paper';
+import {StackScreenProps} from '@react-navigation/stack';
+import {AppStackParamList} from '@routes/RouteTypes';
 
 type StudentType = {
   nama: string;
@@ -35,10 +37,8 @@ const studentItems: StudentType[] = [
   {nama: 'Andi Rayka', kelas: '1 SD', sekolah: 'SDN 1 Buduran'},
 ];
 
-type Props = {
-  navigation: any;
-};
-export const ListStudents: FC<Props> = ({navigation}) => {
+type ScreenProps = StackScreenProps<AppStackParamList, 'ListStudents'>;
+export const ListStudents: FC<ScreenProps> = ({navigation}) => {
   const [isEmptyData, setIsEmptyData] = useState(false);
 
   return (

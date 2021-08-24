@@ -9,17 +9,17 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {AppStackParamList} from '@routes/RouteTypes';
 
 type FormDataType = {
   nama: string;
   sekolah: string;
   jenjangKelas: string;
 };
-type Props = {
-  navigation: any;
-  route: any;
-};
-export const EditStudent: FC<Props> = ({navigation, route}) => {
+
+type ScreenProps = StackScreenProps<AppStackParamList, 'EditStudent'>;
+export const EditStudent: FC<ScreenProps> = ({route}) => {
   const item = route.params?.item || {};
 
   const {

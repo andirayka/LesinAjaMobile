@@ -10,8 +10,16 @@ import {
 } from 'react-native';
 import {Button} from 'react-native-paper';
 import {AuthContext} from '@context/AuthContext';
+import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
+import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 
-export const Settings: FC<{navigation: any}> = ({navigation}) => {
+type ScreenProps = CompositeScreenProps<
+  MaterialBottomTabScreenProps<MainTabParamList, 'Settings'>,
+  StackScreenProps<AppStackParamList>
+>;
+export const Settings: FC<ScreenProps> = ({navigation}) => {
   const {logout} = useContext(AuthContext);
 
   return (
