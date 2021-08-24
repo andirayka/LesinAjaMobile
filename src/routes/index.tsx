@@ -14,7 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {getLocalStorage} from '@utils';
-import {localStorageKey} from '@constants';
+import {lsKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -27,7 +27,7 @@ const AppRouter: FC = () => {
 
   useEffect(() => {
     // Check data
-    getLocalStorage(localStorageKey.userRole).then(res => {
+    getLocalStorage(lsKey.userRole).then(res => {
       if (res) {
         setUserRole(res);
       }
