@@ -9,7 +9,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 

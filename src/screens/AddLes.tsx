@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import {ButtonFormSubmit, Header, InputRadio} from '@components';
-import {color, dimens} from '@constants';
+import {ButtonFormSubmit, Header, InputChoice, InputRadio} from '@components';
+import {color, dimens, master_pilihanles} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
@@ -14,6 +14,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
 type FormDataType = {
+  pilihanles: string;
   siswa: '' | 'laki-laki' | 'perempuan' | 'bebas';
 };
 type ScreenProps = StackScreenProps<AppStackParamList>;
@@ -35,8 +36,25 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
       <Header title="Tambah Les Baru" />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View
-          style={{flex: 1, padding: dimens.standard, paddingTop: dimens.small}}>
+        <View style={{flex: 1, padding: dimens.standard}}>
+          {/* Pilihan les */}
+          <Controller
+            control={control}
+            rules={{required: true}}
+            render={({field: {onChange, value}}) => (
+              <InputChoice
+                label="Pilihan Les"
+                value={value}
+                error={!!errors.pilihanles}
+                errorMessage="Harap pilih les yang akan diikuti"
+                onSelect={item => onChange(item.nama)}
+                listData={master_pilihanles}
+              />
+            )}
+            name="pilihanles"
+            defaultValue={''}
+          />
+
           {/* Jenis kelamin tutor */}
           <Controller
             control={control}

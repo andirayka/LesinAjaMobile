@@ -19,7 +19,12 @@ export const ButtonFormSubmit: FC<Props> = ({text, onPress}) => {
           paddingHorizontal: dimens.standard,
           paddingBottom: dimens.small,
         }}>
-        <Button mode="contained" contentStyle={{height: 48}} onPress={onPress}>
+        <Button
+          mode="contained"
+          labelStyle={{fontSize: dimens.medium_14}}
+          style={{borderRadius: dimens.medium}}
+          contentStyle={{height: 48}}
+          onPress={onPress}>
           {text}
         </Button>
       </View>

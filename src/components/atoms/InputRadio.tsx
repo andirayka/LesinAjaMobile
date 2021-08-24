@@ -24,7 +24,7 @@ export const InputRadio: FC<ComponentProps> = ({
   errorMessage,
 }) => {
   return (
-    <View>
+    <View style={{marginBottom: dimens.standard}}>
       <Text style={styles.label}>{label}</Text>
 
       <RadioButton.Group onValueChange={onChange} value={value}>
