@@ -14,9 +14,10 @@ export const ButtonFormSubmit: FC<Props> = ({text, onPress}) => {
       <View
         style={{
           backgroundColor: 'white',
-          height: 76,
+          height: 82,
           justifyContent: 'center',
           paddingHorizontal: dimens.standard,
+          paddingBottom: dimens.small,
         }}>
         <Button mode="contained" contentStyle={{height: 48}} onPress={onPress}>
           {text}

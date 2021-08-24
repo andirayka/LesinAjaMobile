@@ -1,7 +1,7 @@
 import {dimens} from '@constants';
 import React, {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {RadioButton, Text} from 'react-native-paper';
+import {HelperText, RadioButton, Text} from 'react-native-paper';
 
 type RadioItem = {
   text: string;
@@ -12,12 +12,16 @@ type ComponentProps = {
   onChange: (val: string) => void;
   value: string;
   radioItems: RadioItem[];
+  error: boolean;
+  errorMessage: string;
 };
 export const InputRadio: FC<ComponentProps> = ({
   label,
   onChange,
   value,
   radioItems,
+  error,
+  errorMessage,
 }) => {
   return (
     <View>
@@ -35,6 +39,14 @@ export const InputRadio: FC<ComponentProps> = ({
           })}
         </View>
       </RadioButton.Group>
+
+      {error && (
+        <HelperText
+          style={{paddingLeft: 0, fontSize: dimens.medium_14}}
+          type="error">
+          {errorMessage}
+        </HelperText>
+      )}
     </View>
   );
 };

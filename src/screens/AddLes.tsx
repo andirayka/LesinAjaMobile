@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Header, InputRadio} from '@components';
+import {ButtonFormSubmit, Header, InputRadio} from '@components';
 import {color, dimens} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
 import {
@@ -51,6 +51,8 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
                   {text: 'Perempuan', value: 'perempuan'},
                   {text: 'Bebas', value: 'bebas'},
                 ]}
+                error={!!errors.siswa}
+                errorMessage="Harap pilih prefrensi tutor"
               />
             )}
             name="siswa"
@@ -58,6 +60,9 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
           />
         </View>
       </ScrollView>
+
+      {/* Submit button */}
+      <ButtonFormSubmit text="Kirim" onPress={handleSubmit(onSubmit)} />
     </SafeAreaView>
   );
 };
