@@ -23,7 +23,10 @@ const Tab = createMaterialBottomTabNavigator();
 // Main router fo the App
 const AppRouter: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const {userRole, setUserRole} = useContext(AuthContext);
+  const {
+    state: {userRole},
+    setUserRole,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     // Check data
@@ -33,7 +36,7 @@ const AppRouter: FC = () => {
       }
       setIsLoading(false);
     });
-  }, []);
+  }, [setUserRole]);
 
   // When checking data, show splash screen
   if (isLoading) {
@@ -63,7 +66,7 @@ const AppRouter: FC = () => {
   );
 };
 
-const MainTabs: FC<any> = ({props}) => {
+const MainTabs: FC = () => {
   return (
     <Tab.Navigator
       initialRouteName="Les"

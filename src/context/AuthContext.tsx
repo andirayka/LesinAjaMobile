@@ -1,32 +1,34 @@
-import {localStorageKey} from '@constants';
+import {lsKey} from '@constants';
 import {clearLocalStorage, setLocalStorage} from '@utils';
-import React, {createContext, useEffect, useReducer} from 'react';
+import React, {createContext, useCallback, useReducer} from 'react';
 import {FC} from 'react';
 
 type ContextType = {
-  userToken?: string;
-  // setUserToken?: (value: string) => void;
+  state: {
+    userRole: '' | 'admin' | 'tutor' | 'parent';
+  };
+  loginParent: () => void;
+  setUserRole: (value: string) => void;
+  logout: () => void;
 };
 
 // * initial Value
-type InitialValueType = {
-  userRole: 'admin' | 'tutor' | 'parent';
-};
-const initialValue = {
-  // userToken: '',
-  userRole: '',
+const initialValue: ContextType = {
+  state: {
+    userRole: '',
+  },
+  loginParent: () => {},
+  setUserRole: () => {},
+  logout: () => {},
 };
 
 // * Reducer
 type Actions = {
   type: 'SET_USER_TOKEN' | 'SET_USER_ROLE';
-  userToken?: string;
   userRole?: string;
 };
-const reducer = (state: object, action: Actions) => {
+const reducer = (state: any, action: Actions) => {
   switch (action.type) {
-    case 'SET_USER_TOKEN':
-      return {...state, userToken: action.userToken};
     case 'SET_USER_ROLE':
       return {...state, userRole: action.userRole};
 
@@ -35,22 +37,19 @@ const reducer = (state: object, action: Actions) => {
   }
 };
 
-export const AuthContext = createContext<any>(initialValue);
+export const AuthContext = createContext<ContextType>(initialValue);
 export const AuthProvider: FC = ({children}) => {
-  const [state, dispatch] = useReducer(reducer, initialValue);
-
-  // const setUserToken = (value: string) => {
-  //   dispatch({type: 'SET_USER_TOKEN', userToken: value});
-  // };
+  const [state, dispatch] = useReducer(reducer, initialValue.state);
 
   const loginParent = async () => {
-    await setLocalStorage(localStorageKey.userRole, 'parent');
+    await setLocalStorage(lsKey.userRole, 'parent');
     dispatch({type: 'SET_USER_ROLE', userRole: 'parent'});
   };
 
-  const setUserRole = (value: string) => {
+  const setUserRole = useCallback((value: string) => {
+    console.log('iya');
     dispatch({type: 'SET_USER_ROLE', userRole: value});
-  };
+  }, []);
 
   const logout = async () => {
     await clearLocalStorage();
@@ -58,7 +57,7 @@ export const AuthProvider: FC = ({children}) => {
   };
 
   return (
-    <AuthContext.Provider value={{...state, setUserRole, loginParent, logout}}>
+    <AuthContext.Provider value={{state, setUserRole, loginParent, logout}}>
       {children}
     </AuthContext.Provider>
   );
