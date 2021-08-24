@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import {
-  ButtonFormSubmit,
   CardKeyValue,
   EmptyData,
   FABList,
@@ -9,7 +8,6 @@ import {
   OneLineInfo,
 } from '@components';
 import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,16 +15,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {
-  Button,
-  Card,
-  Chip,
-  FAB,
-  Paragraph,
-  Text,
-  TextInput,
-  Title,
-} from 'react-native-paper';
+import {Card, Chip} from 'react-native-paper';
 import dayjs from 'dayjs';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
@@ -121,7 +110,7 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
       <FABList
         label="Tambah Les Baru"
         onPress={() => {
-          // navigation.navigate('EditStudent');
+          navigation.navigate('AddLes');
         }}
       />
     </SafeAreaView>

@@ -8,7 +8,7 @@ const MainTab = createMaterialBottomTabNavigator<MainTabParamList>();
 export const MainTabs: FC = () => {
   return (
     <MainTab.Navigator
-      initialRouteName="Settings"
+      initialRouteName="Les"
       barStyle={{backgroundColor: '#FCD34D'}}>
       <MainTab.Screen
         name="Home"

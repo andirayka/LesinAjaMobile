@@ -10,11 +10,11 @@ import {
   ScrollView,
 } from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
+import {StackScreenProps} from '@react-navigation/stack';
+import {AppStackParamList} from '@routes/RouteTypes';
 
-type Props = {
-  navigation: any;
-};
-export const DetailStudent: FC<Props> = ({navigation}) => {
+type ScreenProps = StackScreenProps<AppStackParamList, 'ListStudents'>;
+export const DetailStudent: FC<ScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
@@ -22,7 +22,12 @@ export const DetailStudent: FC<Props> = ({navigation}) => {
       <Header title="Ubah Data Akun" />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{flex: 1, paddingHorizontal: dimens.standard}}></View>
+        <View
+          style={{
+            flex: 1,
+            padding: dimens.standard,
+            paddingTop: dimens.small,
+          }}></View>
       </ScrollView>
     </SafeAreaView>
   );

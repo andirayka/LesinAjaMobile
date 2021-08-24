@@ -41,15 +41,14 @@ export const AuthContext = createContext<ContextType>(initialValue);
 export const AuthProvider: FC = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialValue.state);
 
+  const setUserRole = useCallback((value: string) => {
+    dispatch({type: 'SET_USER_ROLE', userRole: value});
+  }, []);
+
   const loginParent = async () => {
     await setLocalStorage(lsKey.userRole, 'parent');
     dispatch({type: 'SET_USER_ROLE', userRole: 'parent'});
   };
-
-  const setUserRole = useCallback((value: string) => {
-    console.log('iya');
-    dispatch({type: 'SET_USER_ROLE', userRole: value});
-  }, []);
 
   const logout = async () => {
     await clearLocalStorage();
