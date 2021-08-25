@@ -1,18 +1,22 @@
 import React, {FC, useState} from 'react';
-import {color, dimens} from '@constants';
+import {color, dimens, PilihanLesType} from '@constants';
 import {StyleSheet, View} from 'react-native';
-import {Button, List, Modal, Portal, Searchbar, Text} from 'react-native-paper';
+import {List, Modal, Portal, Searchbar} from 'react-native-paper';
 import {InputText} from '@components/atoms';
 import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
+import {ScrollView} from 'react-native-gesture-handler';
 
 interface InputProps extends Partial<TextInputProps> {}
 type ComponentProps = InputProps & {
-  onSelect: (item: {nama: string}) => void;
+  onSelect: (item: PilihanLesType) => void;
   errorMessage?: string;
-  listData: {nama: string}[];
+  listData: any[];
+  keyMenuTitle: string;
+  keyMenuDescription: string;
 };
 export const InputChoice: FC<ComponentProps> = props => {
-  const {onSelect, errorMessage, listData} = props;
+  const {onSelect, errorMessage, listData, keyMenuTitle, keyMenuDescription} =
+    props;
   const [modalVisible, setModalVisible] = useState(false);
   const [keyword, setKeyword] = useState('');
 
@@ -24,7 +28,7 @@ export const InputChoice: FC<ComponentProps> = props => {
     return matchKeyword.test(item.nama);
   });
 
-  const onPressItem = (item: object) => {
+  const onPressItem = (item: any) => {
     onSelect(item);
     setModalVisible(false);
   };
@@ -43,18 +47,20 @@ export const InputChoice: FC<ComponentProps> = props => {
               onChangeText={setKeyword}
               value={keyword}
             />
-            <View style={{padding: dimens.standard}}>
-              {searchedData.map(item => {
+            <ScrollView
+              contentContainerStyle={{padding: dimens.standard, flexGrow: 1}}>
+              {searchedData.map((item, index) => {
                 return (
                   <List.Item
                     style={styles.listItem}
-                    key={item.nama}
-                    title={item.nama}
+                    key={index}
+                    title={item[keyMenuTitle]}
+                    description={item[keyMenuDescription]}
                     onPress={() => onPressItem(item)}
                   />
                 );
               })}
-            </View>
+            </ScrollView>
           </View>
         </Modal>
       </Portal>

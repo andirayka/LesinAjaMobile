@@ -1,6 +1,12 @@
 import React, {FC} from 'react';
 import {ButtonFormSubmit, Header, InputChoice, InputRadio} from '@components';
-import {color, dimens, master_pilihanles} from '@constants';
+import {
+  color,
+  dimens,
+  master_pilihanles,
+  master_siswa,
+  PilihanLesType,
+} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
@@ -15,7 +21,8 @@ import {AppStackParamList} from '@routes/RouteTypes';
 
 type FormDataType = {
   pilihanles: string;
-  siswa: '' | 'laki-laki' | 'perempuan' | 'bebas';
+  preferensiTutor: '' | 'laki-laki' | 'perempuan' | 'bebas';
+  siswa: string;
 };
 type ScreenProps = StackScreenProps<AppStackParamList>;
 export const AddLes: FC<ScreenProps> = ({navigation}) => {
@@ -37,6 +44,26 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
+          {/* Siswa */}
+          <Controller
+            control={control}
+            rules={{required: true}}
+            render={({field: {onChange, value}}) => (
+              <InputChoice
+                label="Siswa yang Mengikuti Les"
+                value={value}
+                error={!!errors.siswa}
+                errorMessage="Harap pilih siswa yang mengikuti les"
+                onSelect={item => onChange(item.nama)}
+                listData={master_siswa}
+                keyMenuTitle="nama"
+                keyMenuDescription="jenjangKelas"
+              />
+            )}
+            name="siswa"
+            defaultValue={''}
+          />
+
           {/* Pilihan les */}
           <Controller
             control={control}
@@ -49,6 +76,8 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
                 errorMessage="Harap pilih les yang akan diikuti"
                 onSelect={item => onChange(item.nama)}
                 listData={master_pilihanles}
+                keyMenuTitle="nama"
+                keyMenuDescription="harga"
               />
             )}
             name="pilihanles"
@@ -69,11 +98,11 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
                   {text: 'Perempuan', value: 'perempuan'},
                   {text: 'Bebas', value: 'bebas'},
                 ]}
-                error={!!errors.siswa}
+                error={!!errors.preferensiTutor}
                 errorMessage="Harap pilih prefrensi tutor"
               />
             )}
-            name="siswa"
+            name="preferensiTutor"
             defaultValue={''}
           />
         </View>
@@ -84,6 +113,8 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
     </SafeAreaView>
   );
 };
+
+const TotalPrice = ({les}) => {};
 
 const styles = StyleSheet.create({
   container: {
