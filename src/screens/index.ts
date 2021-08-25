@@ -8,3 +8,4 @@ export * from './Settings';
 export * from './ListStudents';
 export * from './EditStudent';
 export * from './AddLes';
+export * from './DetailLes';

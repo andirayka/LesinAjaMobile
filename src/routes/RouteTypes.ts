@@ -11,4 +11,5 @@ export type AppStackParamList = {
   ListStudents: undefined;
   EditStudent: undefined | {item: any};
   AddLes: undefined;
+  DetailLes: undefined;
 };

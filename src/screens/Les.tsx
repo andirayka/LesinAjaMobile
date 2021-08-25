@@ -35,7 +35,7 @@ type LesType = {
 
 const lesItems: LesType[] = [
   {
-    namaLes: 'Mengaji TK A',
+    namaLes: 'Mengaji kelas 3 SD',
     totalPertemuan: 8,
     pertemuanSelesai: 6,
     tglMulai: 1629698756,
@@ -45,23 +45,23 @@ const lesItems: LesType[] = [
     sudahBayar: true,
   },
   {
-    namaLes: 'Mengaji TK B',
-    totalPertemuan: 12,
-    pertemuanSelesai: null,
-    tglMulai: null,
-    tglSelesai: null,
-    siswa: 'Andi Rayka',
-    tutor: null,
-    sudahBayar: false,
-  },
-  {
-    namaLes: 'Mengaji 1 SD',
+    namaLes: 'Mengaji kelas 1 SD',
     totalPertemuan: 4,
     pertemuanSelesai: null,
     tglMulai: null,
     tglSelesai: null,
     siswa: 'Andi Rayka',
     tutor: 'Udin Harun',
+    sudahBayar: false,
+  },
+  {
+    namaLes: 'Mengaji kelas 2 SD',
+    totalPertemuan: 12,
+    pertemuanSelesai: null,
+    tglMulai: null,
+    tglSelesai: null,
+    siswa: 'Andi Rayka',
+    tutor: null,
     sudahBayar: false,
   },
 ];
@@ -86,23 +86,26 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
         }}
       />
 
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View
-          style={{flex: 1, padding: dimens.standard, paddingTop: dimens.small}}>
-          {isEmptyData ? (
-            <EmptyData />
-          ) : (
-            <>
-              <OneLineInfo info="Klik item untuk melihat detail" />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {isEmptyData ? (
+          <EmptyData />
+        ) : (
+          <>
+            <OneLineInfo info="Klik item untuk melihat detail" />
 
-              {lesItems.map((item, index) => {
-                return (
-                  <StudentItem key={index} item={item} onPress={() => {}} />
-                );
-              })}
-            </>
-          )}
-        </View>
+            {lesItems.map((item, index) => {
+              return (
+                <StudentItem
+                  key={index}
+                  item={item}
+                  onPress={() => {
+                    navigation.navigate('DetailLes');
+                  }}
+                />
+              );
+            })}
+          </>
+        )}
         <Gap y={72} />
       </ScrollView>
 
@@ -179,5 +182,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: color.bg_grey,
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    padding: dimens.standard,
+    paddingTop: dimens.small,
   },
 });

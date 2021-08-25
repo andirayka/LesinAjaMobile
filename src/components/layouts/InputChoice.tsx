@@ -12,7 +12,7 @@ type ComponentProps = InputProps & {
   errorMessage?: string;
   listData: any[];
   keyMenuTitle: string;
-  keyMenuDescription: string;
+  keyMenuDescription?: string;
 };
 export const InputChoice: FC<ComponentProps> = props => {
   const {onSelect, errorMessage, listData, keyMenuTitle, keyMenuDescription} =
@@ -55,7 +55,7 @@ export const InputChoice: FC<ComponentProps> = props => {
                     style={styles.listItem}
                     key={index}
                     title={item[keyMenuTitle]}
-                    description={item[keyMenuDescription]}
+                    description={keyMenuDescription && item[keyMenuDescription]}
                     onPress={() => onPressItem(item)}
                   />
                 );

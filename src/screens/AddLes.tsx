@@ -1,5 +1,11 @@
 import React, {FC} from 'react';
-import {ButtonFormSubmit, Header, InputChoice, InputRadio} from '@components';
+import {
+  ButtonFormSubmit,
+  CardKeyValue,
+  Header,
+  InputChoice,
+  InputRadio,
+} from '@components';
 import {
   color,
   dimens,
@@ -15,7 +21,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Button, Text, TextInput, RadioButton} from 'react-native-paper';
+import {Button, Text, TextInput, RadioButton, Card} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
@@ -23,6 +29,7 @@ type FormDataType = {
   pilihanles: string;
   preferensiTutor: '' | 'laki-laki' | 'perempuan' | 'bebas';
   siswa: string;
+  jadwalLes: {waktu: number}[];
 };
 type ScreenProps = StackScreenProps<AppStackParamList>;
 export const AddLes: FC<ScreenProps> = ({navigation}) => {
@@ -84,6 +91,26 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
             defaultValue={''}
           />
 
+          {/* Jadwal Les Rutin */}
+          {/* <Controller
+            control={control}
+            rules={{required: true}}
+            render={({field: {onChange, value}}) => (
+              <InputChoice
+                label="Jadwal Les Rutin"
+                value="Pilih jadwal les rutin"
+                error={!!errors.pilihanles}
+                errorMessage="Harap pilih les yang akan diikuti"
+                onSelect={item => onChange(item.nama)}
+                listData={master_pilihanles}
+                keyMenuTitle="nama"
+                keyMenuDescription="harga"
+              />
+            )}
+            name="pilihanles"
+            defaultValue={''}
+          /> */}
+
           {/* Jenis kelamin tutor */}
           <Controller
             control={control}
@@ -105,6 +132,13 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
             name="preferensiTutor"
             defaultValue={''}
           />
+
+          {/* Total Price */}
+          <TotalPrice
+            hargaLes="Rp 200.000"
+            hargaDaftar="Rp 150.000"
+            total="Rp 350.000"
+          />
         </View>
       </ScrollView>
 
@@ -114,7 +148,26 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
   );
 };
 
-const TotalPrice = ({les}) => {};
+type TotalPriceType = {
+  hargaLes: string;
+  hargaDaftar?: string;
+  total: string;
+};
+
+const TotalPrice: FC<TotalPriceType> = ({hargaLes, hargaDaftar, total}) => {
+  return (
+    <Card style={{marginTop: dimens.standard}}>
+      <Card.Title title={`Total: ${total}`} />
+
+      <Card.Content style={{marginTop: dimens.small}}>
+        <CardKeyValue keyName="Biaya Les" value={hargaLes} />
+        {hargaDaftar && (
+          <CardKeyValue keyName="Pendaftaran" value={hargaDaftar} />
+        )}
+      </Card.Content>
+    </Card>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
