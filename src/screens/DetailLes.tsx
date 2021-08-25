@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {CardKeyValue, Header} from '@components';
 import {color, dimens} from '@constants';
 import {Controller, useForm} from 'react-hook-form';
@@ -12,9 +12,25 @@ import {
 import {Button, Card, Text, Title} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
+import {getSingleDocument} from '@utils';
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
 export const DetailLes: FC<ScreenProps> = ({navigation}) => {
+  const [buktiBayar, setBuktiBayar] = useState({
+    path: '',
+  });
+
+  const onPressUploadBuktiBayar = async () => {
+    if (buktiBayar.path === '') {
+      const res = await getSingleDocument();
+      if (res) {
+        setBuktiBayar(prev => ({...prev, path: res.uri}));
+      }
+    } else {
+      // Upload
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
@@ -46,14 +62,23 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
         <Card style={{marginTop: dimens.standard}}>
           <Card.Title
             title="Anda Belum Membayar Biaya Les"
-            // subtitle='Klik "Unggah Bukti Pembayaran"'
+            subtitle="Biaya Les: Rp 200.000"
             titleStyle={{color: '#F59E0B'}}
+            subtitleStyle={{fontSize: dimens.medium_14}}
           />
-          <Card.Content>
-            <CardKeyValue keyName="Biaya Les" value="Rp 200.000" keyFlex={8} />
-          </Card.Content>
+          {buktiBayar.path !== '' && (
+            <Card.Cover
+              source={{uri: buktiBayar.path}}
+              style={{
+                marginTop: dimens.small,
+                marginHorizontal: dimens.standard,
+              }}
+            />
+          )}
           <Card.Actions>
-            <Button>Unggah Bukti Pembayaran</Button>
+            <Button onPress={onPressUploadBuktiBayar}>
+              {buktiBayar.path === '' ? 'Unggah Bukti Pembayaran' : 'Kirim'}
+            </Button>
           </Card.Actions>
         </Card>
       </ScrollView>
