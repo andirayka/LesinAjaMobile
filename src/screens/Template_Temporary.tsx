@@ -22,12 +22,7 @@ export const DetailStudent: FC<ScreenProps> = ({navigation}) => {
       <Header title="Ubah Data Akun" />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View
-          style={{
-            flex: 1,
-            padding: dimens.standard,
-            paddingTop: dimens.small,
-          }}></View>
+        <View style={{flex: 1, padding: dimens.standard}}></View>
       </ScrollView>
     </SafeAreaView>
   );

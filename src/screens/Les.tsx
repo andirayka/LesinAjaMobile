@@ -31,6 +31,7 @@ type LesType = {
   tglSelesai: number | null;
   tutor: string | null;
   sudahBayar: boolean;
+  menungguTutor: boolean;
 };
 
 const lesItems: LesType[] = [
@@ -43,6 +44,7 @@ const lesItems: LesType[] = [
     siswa: 'Andi Rayka',
     tutor: 'Udin Harun',
     sudahBayar: true,
+    menungguTutor: false,
   },
   {
     namaLes: 'Mengaji kelas 1 SD',
@@ -53,6 +55,7 @@ const lesItems: LesType[] = [
     siswa: 'Andi Rayka',
     tutor: 'Udin Harun',
     sudahBayar: false,
+    menungguTutor: false,
   },
   {
     namaLes: 'Mengaji kelas 2 SD',
@@ -63,6 +66,18 @@ const lesItems: LesType[] = [
     siswa: 'Andi Rayka',
     tutor: null,
     sudahBayar: false,
+    menungguTutor: false,
+  },
+  {
+    namaLes: 'Mengaji kelas 6 SD',
+    totalPertemuan: 12,
+    pertemuanSelesai: null,
+    tglMulai: null,
+    tglSelesai: null,
+    siswa: 'Andi Rayka',
+    tutor: null,
+    sudahBayar: false,
+    menungguTutor: true,
   },
 ];
 
@@ -132,6 +147,20 @@ const StudentItem: FC<{item: LesType; onPress: () => void}> = ({
     ? `${item.pertemuanSelesai}/`
     : '';
 
+  const statusData = () => {
+    if (item.menungguTutor) {
+      return {text: 'Menunggu ada tutor', bgColor: '#93C5FD'};
+    }
+    if (!item.tutor) {
+      return {text: 'Belum pilih tutor', bgColor: '#FBBF24'};
+    }
+    if (!item.sudahBayar) {
+      return {text: 'Belum bayar les', bgColor: '#F87171'};
+    }
+
+    return null;
+  };
+
   return (
     <Card style={{marginTop: dimens.standard}} onPress={onPress}>
       <Card.Title
@@ -150,26 +179,14 @@ const StudentItem: FC<{item: LesType; onPress: () => void}> = ({
         )}
 
         <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-          {!item.tutor && (
+          {statusData() && (
             <Chip
               icon="cash-multiple"
-              style={{
-                marginTop: dimens.small,
-                marginRight: dimens.small,
-                backgroundColor: '#FBBF24',
-              }}>
-              Belum pilih tutor
-            </Chip>
-          )}
-          {item.tutor && !item.sudahBayar && (
-            <Chip
-              icon="cash-multiple"
-              style={{
-                marginTop: dimens.small,
-                marginRight: dimens.small,
-                backgroundColor: '#F87171',
-              }}>
-              Belum bayar les
+              style={[
+                styles.chipStatus,
+                {backgroundColor: statusData()?.bgColor},
+              ]}>
+              {statusData()?.text}
             </Chip>
           )}
         </View>
@@ -187,5 +204,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: dimens.standard,
     paddingTop: dimens.small,
+  },
+  chipStatus: {
+    marginTop: dimens.small,
+    marginRight: dimens.small,
   },
 });

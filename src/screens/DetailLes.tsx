@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
-import {CardKeyValue, Header} from '@components';
+import {CardKeyValue, Gap, Header} from '@components';
 import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -9,10 +8,22 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Button, Card, Text, Title} from 'react-native-paper';
+import {Avatar, Button, Card, Subheading, Text} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
+
+const listApplyingTutor = [
+  {
+    nama: 'Fahrul Firdaus',
+  },
+  {
+    nama: 'Nico Aidin',
+  },
+  {
+    nama: 'Fiqri Akbar',
+  },
+];
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
 export const DetailLes: FC<ScreenProps> = ({navigation}) => {
@@ -63,7 +74,7 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
           <Card.Title
             title="Anda Belum Membayar Biaya Les"
             subtitle="Biaya Les: Rp 200.000"
-            titleStyle={{color: '#F59E0B'}}
+            titleStyle={{color: '#EF4444'}}
             subtitleStyle={{fontSize: dimens.medium_14}}
           />
           {buktiBayar.path !== '' && (
@@ -81,8 +92,62 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
             </Button>
           </Card.Actions>
         </Card>
+
+        {/* There is no applying tutor */}
+        <Card style={{marginTop: dimens.standard}}>
+          <Card.Title
+            title="Menunggu Ada Tutor"
+            titleStyle={{color: '#2563EB'}}
+          />
+          <Card.Content>
+            <Subheading>Belum ada tutor yang mengambil les ini</Subheading>
+          </Card.Content>
+        </Card>
+
+        {/* Choose Tutor */}
+        <Card style={{marginTop: dimens.standard}}>
+          <Card.Title
+            style={{width: '100%'}}
+            title="Anda Belum Memilih Tutor"
+            subtitle="Klik item untuk melihat detail tutor "
+            titleStyle={{color: '#F59E0B'}}
+            subtitleStyle={{fontSize: dimens.medium_14}}
+          />
+          <Card.Content>
+            {listApplyingTutor.map((item, index) => {
+              return (
+                <TutorItem
+                  key={index}
+                  item={item}
+                  onPress={() => {
+                    navigation.navigate('DetailTutor');
+                  }}
+                />
+              );
+            })}
+          </Card.Content>
+        </Card>
+        <Gap y={dimens.standard} />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const TutorItem: FC<{item: any; onPress: () => void}> = ({item, onPress}) => {
+  return (
+    <Card onPress={onPress} style={{marginTop: dimens.standard}}>
+      <Card.Title
+        title={item.nama}
+        subtitle={item.nama}
+        left={props => (
+          <Avatar.Image
+            {...props}
+            size={45}
+            source={{uri: 'http://placekitten.com/100/100'}}
+          />
+        )}
+      />
+    </Card>
   );
 };
 

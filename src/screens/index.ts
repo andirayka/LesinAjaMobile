@@ -9,3 +9,4 @@ export * from './ListStudents';
 export * from './EditStudent';
 export * from './AddLes';
 export * from './DetailLes';
+export * from './DetailTutor';

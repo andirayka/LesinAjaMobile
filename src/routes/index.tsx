@@ -4,6 +4,7 @@ import {
   AddLes,
   AdminLogin,
   DetailLes,
+  DetailTutor,
   EditStudent,
   GeneralLogin,
   ListStudents,
@@ -61,6 +62,7 @@ const AppRouter: FC = () => {
           <AppStack.Screen name="EditStudent" component={EditStudent} />
           <AppStack.Screen name="AddLes" component={AddLes} />
           <AppStack.Screen name="DetailLes" component={DetailLes} />
+          <AppStack.Screen name="DetailTutor" component={DetailTutor} />
         </AppStack.Navigator>
       )}
     </NavigationContainer>
