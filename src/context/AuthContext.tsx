@@ -7,9 +7,9 @@ type ContextType = {
   state: {
     userRole: '' | 'admin' | 'tutor' | 'parent';
   };
-  loginParent: () => void;
+  loginParent: () => Promise<void>;
   setUserRole: (value: string) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
 };
 
 // * initial Value
@@ -17,9 +17,9 @@ const initialValue: ContextType = {
   state: {
     userRole: '',
   },
-  loginParent: () => {},
+  loginParent: async () => {},
   setUserRole: () => {},
-  logout: () => {},
+  logout: async () => {},
 };
 
 // * Reducer
