@@ -7,7 +7,7 @@ type ScreenType = {
   navigation: any;
 };
 // Login screen for Parent and Tutor
-export const GeneralLogin: FC<ScreenType> = ({navigation}) => {
+export const LoginGeneral: FC<ScreenType> = ({navigation}) => {
   const {loginParent} = useContext(AuthContext);
 
   return (
@@ -25,7 +25,7 @@ export const GeneralLogin: FC<ScreenType> = ({navigation}) => {
       <Button
         contentStyle={{padding: 30}}
         onPress={() => {
-          navigation.navigate('AdminLogin');
+          navigation.navigate('LoginAdmin');
         }}>
         MASUK LOGIN ADMIN
       </Button>

@@ -2,11 +2,11 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {
   Account,
   AddLes,
-  AdminLogin,
+  LoginAdmin,
   DetailLes,
   DetailTutor,
   EditStudent,
-  GeneralLogin,
+  LoginGeneral,
   ListStudents,
   Splash,
 } from '@screens';
@@ -18,7 +18,6 @@ import {AuthContext} from '@context/AuthContext';
 import {MainTabs} from './MainTabs';
 import {AppStackParamList} from './RouteTypes';
 
-const Stack = createStackNavigator();
 const AppStack = createStackNavigator<AppStackParamList>();
 // Main router fo the App
 const AppRouter: FC = () => {
@@ -45,26 +44,28 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      {/* Authentication Stack */}
-      {!userRole && (
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="GeneralLogin" component={GeneralLogin} />
-          <Stack.Screen name="AdminLogin" component={AdminLogin} />
-        </Stack.Navigator>
-      )}
+      <AppStack.Navigator screenOptions={{headerShown: false}}>
+        {/* Authentication Stack */}
+        {!userRole && (
+          <>
+            <AppStack.Screen name="LoginGeneral" component={LoginGeneral} />
+            <AppStack.Screen name="LoginAdmin" component={LoginAdmin} />
+          </>
+        )}
 
-      {/* Parent Tabs */}
-      {userRole === 'parent' && (
-        <AppStack.Navigator screenOptions={{headerShown: false}}>
-          <AppStack.Screen name="MainTabs" component={MainTabs} />
-          <AppStack.Screen name="Account" component={Account} />
-          <AppStack.Screen name="ListStudents" component={ListStudents} />
-          <AppStack.Screen name="EditStudent" component={EditStudent} />
-          <AppStack.Screen name="AddLes" component={AddLes} />
-          <AppStack.Screen name="DetailLes" component={DetailLes} />
-          <AppStack.Screen name="DetailTutor" component={DetailTutor} />
-        </AppStack.Navigator>
-      )}
+        {/* Parent Tabs */}
+        {userRole === 'parent' && (
+          <>
+            <AppStack.Screen name="MainTabs" component={MainTabs} />
+            <AppStack.Screen name="Account" component={Account} />
+            <AppStack.Screen name="ListStudents" component={ListStudents} />
+            <AppStack.Screen name="EditStudent" component={EditStudent} />
+            <AppStack.Screen name="AddLes" component={AddLes} />
+            <AppStack.Screen name="DetailLes" component={DetailLes} />
+            <AppStack.Screen name="DetailTutor" component={DetailTutor} />
+          </>
+        )}
+      </AppStack.Navigator>
     </NavigationContainer>
   );
 };

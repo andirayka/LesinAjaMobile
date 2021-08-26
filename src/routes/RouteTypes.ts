@@ -8,6 +8,8 @@ export type MainTabParamList = {
 export type AppStackParamList = {
   MainTabs: NavigatorScreenParams<MainTabParamList>;
   Account: undefined;
+  LoginAdmin: undefined;
+  LoginGeneral: undefined;
   ListStudents: undefined;
   EditStudent: undefined | {item: any};
   AddLes: undefined;
