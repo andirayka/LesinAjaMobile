@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {ButtonFormSubmit, Header, InputText} from '@components';
 import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -28,7 +28,7 @@ export const Account: FC<ScreenProps> = () => {
     formState: {errors},
   } = useForm<FormDataType>({mode: 'onChange'});
 
-  const onSubmit = async (data: object) => {
+  const onSubmit: SubmitHandler<FormDataType> = async data => {
     console.log(data);
   };
 

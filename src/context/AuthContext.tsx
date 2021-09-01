@@ -1,14 +1,17 @@
 import {lsKey} from '@constants';
-import {clearLocalStorage, setLocalStorage} from '@utils';
+import {apiPost, clearLocalStorage, setLocalStorage} from '@utils';
 import React, {createContext, useCallback, useReducer} from 'react';
 import {FC} from 'react';
 
+// Types
 type ContextType = {
   state: {
     userRole: '' | 'admin' | 'tutor' | 'parent';
+    userInfo: any;
   };
-  loginParent: () => Promise<void>;
-  setUserRole: (value: string) => void;
+  login: (userInfo: any) => Promise<{isRegistered: boolean}>;
+  register: (posisi: number) => Promise<{isRegistered: boolean}>;
+  setUserRole: (value: string, setLs?: boolean) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -16,21 +19,26 @@ type ContextType = {
 const initialValue: ContextType = {
   state: {
     userRole: '',
+    userInfo: {},
   },
-  loginParent: async () => {},
-  setUserRole: () => {},
+  login: async () => ({isRegistered: false}),
+  register: async () => ({isRegistered: false}),
+  setUserRole: async () => {},
   logout: async () => {},
 };
 
 // * Reducer
 type Actions = {
-  type: 'SET_USER_TOKEN' | 'SET_USER_ROLE';
+  type: 'SET_USER_TOKEN' | 'SET_USER_ROLE' | 'SET_USER_INFO';
   userRole?: string;
+  userInfo?: any;
 };
 const reducer = (state: any, action: Actions) => {
   switch (action.type) {
     case 'SET_USER_ROLE':
       return {...state, userRole: action.userRole};
+    case 'SET_USER_INFO':
+      return {...state, userInfo: action.userInfo};
 
     default:
       return state;
@@ -41,22 +49,57 @@ export const AuthContext = createContext<ContextType>(initialValue);
 export const AuthProvider: FC = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialValue.state);
 
-  const setUserRole = useCallback((value: string) => {
+  const setUserRole = useCallback(async (value: string, setLs?: boolean) => {
+    if (setLs) {
+      await setLocalStorage(lsKey.userRole, value);
+    }
     dispatch({type: 'SET_USER_ROLE', userRole: value});
   }, []);
 
-  const loginParent = async () => {
-    await setLocalStorage(lsKey.userRole, 'parent');
-    dispatch({type: 'SET_USER_ROLE', userRole: 'parent'});
+  const login = async (userInfo: any) => {
+    const {success, data} = await apiPost({
+      url: 'auth/login',
+      payload: {token: userInfo.idToken},
+      isLogin: true,
+    });
+
+    // If user has account, login, otherwise register
+    if (success) {
+      if (data.isExist) {
+        // setUserRole(role === 1 ? 'tutor' : 'student', true);
+
+        return {isRegistered: true};
+      }
+      dispatch({type: 'SET_USER_INFO', userInfo});
+    }
+
+    return {isRegistered: false};
+  };
+
+  const register = async (posisi: number) => {
+    // POSITIONS:
+    // ADMIN = 0
+    // TUTOR = 1
+    // WALI = 2
+
+    const {success, data} = await apiPost({
+      url: 'auth/register',
+      payload: {email: state.userInfo.user.email, posisi},
+    });
+    if (success) {
+      return {isRegistered: true};
+    }
+
+    return {isRegistered: true};
   };
 
   const logout = async () => {
     await clearLocalStorage();
-    setUserRole('');
+    setUserRole('', false);
   };
 
   return (
-    <AuthContext.Provider value={{state, setUserRole, loginParent, logout}}>
+    <AuthContext.Provider value={{state, setUserRole, login, register, logout}}>
       {children}
     </AuthContext.Provider>
   );

@@ -12,7 +12,7 @@ import {
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {getLocalStorage} from '@utils';
+import {clearLocalStorage, getLocalStorage} from '@utils';
 import {lsKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 import {MainTabs} from './MainTabs';
@@ -35,6 +35,8 @@ const AppRouter: FC = () => {
       }
       setIsLoading(false);
     });
+
+    // clearLocalStorage();
   }, [setUserRole]);
 
   // When checking data, show splash screen

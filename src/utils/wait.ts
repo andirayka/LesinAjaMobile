@@ -1,6 +1,6 @@
 // Wait certain times before doing something
-export const wait = (timeout: number) => {
+export const wait = (ms: number) => {
   return new Promise(resolve => {
-    setTimeout(resolve, timeout);
+    setTimeout(resolve, ms);
   });
 };
