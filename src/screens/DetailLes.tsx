@@ -14,15 +14,9 @@ import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
 
 const listApplyingTutor = [
-  {
-    nama: 'Fahrul Firdaus',
-  },
-  {
-    nama: 'Nico Aidin',
-  },
-  {
-    nama: 'Fiqri Akbar',
-  },
+  {nama: 'Fahrul Firdaus'},
+  {nama: 'Nico Aidin'},
+  {nama: 'Fiqri Akbar'},
 ];
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
