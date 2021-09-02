@@ -9,6 +9,7 @@ import {
   LoginGeneral,
   ListStudents,
   Splash,
+  DetailPresensi,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -65,6 +66,7 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="AddLes" component={AddLes} />
             <AppStack.Screen name="DetailLes" component={DetailLes} />
             <AppStack.Screen name="DetailTutor" component={DetailTutor} />
+            <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
           </>
         )}
       </AppStack.Navigator>

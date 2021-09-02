@@ -1,14 +1,8 @@
 import React, {FC, useState} from 'react';
 import {CardKeyValue, Gap, Header, NestedCard} from '@components';
-import {color, dimens, coursePresenceList, listApplyingTutor} from '@constants';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  View,
-  ScrollView,
-} from 'react-native';
-import {Avatar, Button, Card, Subheading, Text} from 'react-native-paper';
+import {color, dimens} from '@constants';
+import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
+import {Avatar, Button, Card, Subheading} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
@@ -29,6 +23,46 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
       // Upload
     }
   };
+
+  const coursePresenceList = [
+    {
+      tanggal: 'Kamis, 02 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+      status: 'selesai',
+    },
+    {
+      tanggal: 'Jumat, 03 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+      status: 'selesai',
+    },
+    {
+      tanggal: 'Sabtu, 04 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+    },
+    {
+      tanggal: 'Minggu, 06 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+    },
+  ];
+
+  const listApplyingTutor = [
+    {
+      nama: 'Fahrul Firdaus',
+      perguruanTinggi: 'Politeknik Elektronika Negeri Surabaya',
+    },
+    {
+      nama: 'Nico Aidin',
+      perguruanTinggi: 'Universitas Negeri Surabaya',
+    },
+    {
+      nama: 'Fiqri Akbar',
+      perguruanTinggi: 'Universitas Jember',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -141,7 +175,7 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
                   subtitle={item.waktu}
                   status={item.status && item.status}
                   onPress={() => {
-                    navigation.navigate('DetailTutor');
+                    navigation.navigate('DetailPresensi');
                   }}
                 />
               );

@@ -24,7 +24,7 @@ export const NestedCard: FC<Props> = ({
         title={title}
         subtitle={subtitle}
         left={left}
-        subtitleStyle={{marginBottom: 0}}
+        subtitleStyle={{marginBottom: 0, paddingRight: dimens.standard}}
       />
       {status && <Paragraph style={styles.paragraph}>{status}</Paragraph>}
     </Card>

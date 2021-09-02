@@ -15,4 +15,5 @@ export type AppStackParamList = {
   AddLes: undefined;
   DetailLes: undefined;
   DetailTutor: undefined;
+  DetailPresensi: undefined;
 };
