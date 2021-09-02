@@ -65,8 +65,8 @@ export const AuthProvider: FC = ({children}) => {
 
     // If user has account, login, otherwise register
     if (success) {
-      if (data.isExist) {
-        // setUserRole(role === 1 ? 'tutor' : 'student', true);
+      if (data.posisi) {
+        setUserRole(data.posisi == 'Wali' ? 'parent' : 'tutor', true);
 
         return {isRegistered: true};
       }
