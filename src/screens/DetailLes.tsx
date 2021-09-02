@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import {CardKeyValue, Gap, Header} from '@components';
-import {color, dimens} from '@constants';
+import {CardKeyValue, Gap, Header, NestedCard} from '@components';
+import {color, dimens, coursePresenceList, listApplyingTutor} from '@constants';
 import {
   SafeAreaView,
   StatusBar,
@@ -12,18 +12,6 @@ import {Avatar, Button, Card, Subheading, Text} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
-
-const listApplyingTutor = [
-  {
-    nama: 'Fahrul Firdaus',
-  },
-  {
-    nama: 'Nico Aidin',
-  },
-  {
-    nama: 'Fiqri Akbar',
-  },
-];
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
 export const DetailLes: FC<ScreenProps> = ({navigation}) => {
@@ -116,9 +104,42 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
           <Card.Content>
             {listApplyingTutor.map((item, index) => {
               return (
-                <TutorItem
+                <NestedCard
                   key={index}
-                  item={item}
+                  title={item.nama}
+                  subtitle={item.perguruanTinggi}
+                  onPress={() => {
+                    navigation.navigate('DetailTutor');
+                  }}
+                  left={props => (
+                    <Avatar.Image
+                      {...props}
+                      size={45}
+                      source={{uri: 'http://placekitten.com/100/100'}}
+                    />
+                  )}
+                />
+              );
+            })}
+          </Card.Content>
+        </Card>
+
+        {/* Tutor presence */}
+        <Card style={{marginTop: dimens.standard}}>
+          <Card.Title
+            title="Presensi Les"
+            titleStyle={{color: '#2563EB'}}
+            subtitle="Klik item untuk melihat detail presensi"
+            subtitleStyle={{fontSize: dimens.medium_14}}
+          />
+          <Card.Content>
+            {coursePresenceList.map((item, index) => {
+              return (
+                <NestedCard
+                  key={index}
+                  title={item.tanggal}
+                  subtitle={item.waktu}
+                  status={item.status && item.status}
                   onPress={() => {
                     navigation.navigate('DetailTutor');
                   }}
@@ -130,24 +151,6 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
         <Gap y={dimens.standard} />
       </ScrollView>
     </SafeAreaView>
-  );
-};
-
-const TutorItem: FC<{item: any; onPress: () => void}> = ({item, onPress}) => {
-  return (
-    <Card onPress={onPress} style={{marginTop: dimens.standard}}>
-      <Card.Title
-        title={item.nama}
-        subtitle={item.nama}
-        left={props => (
-          <Avatar.Image
-            {...props}
-            size={45}
-            source={{uri: 'http://placekitten.com/100/100'}}
-          />
-        )}
-      />
-    </Card>
   );
 };
 
