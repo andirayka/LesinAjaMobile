@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {color, dimens, PilihanLesType} from '@constants';
+import {color, dimens} from '@constants';
 import {StyleSheet, View} from 'react-native';
 import {List, Modal, Portal, Searchbar} from 'react-native-paper';
 import {InputText} from '@components/atoms';
@@ -8,7 +8,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 interface InputProps extends Partial<TextInputProps> {}
 type ComponentProps = InputProps & {
-  onSelect: (item: PilihanLesType) => void;
+  onSelect: (item: any) => void;
   errorMessage?: string;
   listData: any[];
   keyMenuTitle: string;
@@ -25,7 +25,7 @@ export const InputChoice: FC<ComponentProps> = props => {
     const matchKeyword = RegExp(keyword, 'i');
 
     // return data yang sesuai dengan pencarian
-    return matchKeyword.test(item.nama);
+    return matchKeyword.test(item[keyMenuTitle]);
   });
 
   const onPressItem = (item: any) => {
@@ -67,7 +67,6 @@ export const InputChoice: FC<ComponentProps> = props => {
 
       <InputText
         {...props}
-        buttonMode
         onPressButton={() => setModalVisible(true)}
         errorMessage={errorMessage}
       />

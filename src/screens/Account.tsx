@@ -2,6 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {
   ButtonFormSubmit,
   Header,
+  InputChoice,
   InputText,
   SkeletonLoading,
 } from '@components';
@@ -23,9 +24,9 @@ type FormDataType = {
   wali: string;
   pekerjaan: string;
   idprovinsi: string;
-  idkabupaten: string;
-  idkecamatan: string;
-  iddesa: string;
+  // idkabupaten: string;
+  // idkecamatan: string;
+  // iddesa: string;
   alamat: string;
   telp: string;
 };
@@ -38,29 +39,36 @@ export const Account: FC<ScreenProps> = () => {
     handleSubmit,
     formState: {errors},
   } = useForm<FormDataType>({mode: 'onChange'});
-  const [daerah, setDaerah] = useState({
+  const [listDaerah, setListDaerah] = useState({
     provinsi: [],
     kota: [],
     kecamatan: [],
     desa: [],
+  });
+  const [selectedDaerah, setSelectedDaerah] = useState({
+    provinsi: '',
+    kota: '',
+    kecamatan: '',
+    desa: '',
   });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getInitialData = async () => {
       const provinsi = await getListDaerah({type: 'provinsi'});
-      setDaerah(prev => ({...prev, provinsi}));
+      setListDaerah(prev => ({...prev, provinsi}));
 
       // const {data} = await apiGet({url: 'wali/profile'});
       // console.log(data);
 
       setIsLoading(false);
+      console.log(provinsi);
     };
 
     getInitialData();
 
     return () => {
-      cancelApiRequest();
+      // cancelApiRequest();
     };
   }, []);
 
@@ -80,6 +88,7 @@ export const Account: FC<ScreenProps> = () => {
         <>
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
             <View style={{flex: 1, padding: dimens.standard}}>
+              {/* Nama */}
               <Controller
                 control={control}
                 rules={{required: true}}
@@ -99,6 +108,7 @@ export const Account: FC<ScreenProps> = () => {
                 defaultValue=""
               />
 
+              {/* No telp */}
               <Controller
                 control={control}
                 rules={{required: true}}
@@ -118,24 +128,47 @@ export const Account: FC<ScreenProps> = () => {
                 defaultValue=""
               />
 
+              {/* Provinsi */}
+              {listDaerah.provinsi && (
+                <Controller
+                  control={control}
+                  rules={{required: true}}
+                  render={({field: {onChange, value}}) => (
+                    <InputChoice
+                      label="Domisili - Provinsi"
+                      value={value}
+                      error={!!errors.idprovinsi}
+                      errorMessage="Harap pilih provinsi tempat tinggal Anda"
+                      onSelect={item => onChange(item.name)}
+                      listData={listDaerah.provinsi}
+                      keyMenuTitle="name"
+                    />
+                  )}
+                  name="idprovinsi"
+                  defaultValue={''}
+                />
+              )}
+
+              {/* Alamat */}
               <Controller
                 control={control}
                 rules={{required: true}}
                 render={({field: {onChange, onBlur, value}}) => (
                   <InputText
-                    label="Alamat Rumah"
-                    placeholder="Masukkan alamat rumah Anda"
+                    label="Alamat lengkap Rumah"
+                    placeholder="Contoh: jalan, RT, RW"
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
                     error={!!errors.alamat}
-                    errorMessage="Alamat rumah harus diisi"
+                    errorMessage="Alamat lengkap rumah harus diisi"
                   />
                 )}
                 name="alamat"
                 defaultValue=""
               />
 
+              {/* Pekerjaan */}
               <Controller
                 control={control}
                 rules={{required: true}}
