@@ -1,6 +1,6 @@
 import React, {FC, ReactNode} from 'react';
 import {Card, Paragraph} from 'react-native-paper';
-import {dimens} from '@constants';
+import {dimens, color} from '@constants';
 import {StyleSheet} from 'react-native';
 
 type Props = {
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     marginLeft: dimens.standard,
     marginBottom: dimens.standard,
     marginTop: 0,
-    color: '#10B981',
+    color: color.green_500,
   },
 });

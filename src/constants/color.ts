@@ -6,6 +6,7 @@ export const color = {
   btn_black: '#03060C',
   loading: '#6467E5',
   bg_grey: '#F0F0F1',
+  green_500: '#10B981',
   green: '#6FBC4B',
   green2: '#C5E4B7',
   green3: '#E2F2DB',
