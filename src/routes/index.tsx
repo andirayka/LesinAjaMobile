@@ -50,8 +50,8 @@ const AppRouter: FC = () => {
   return (
     <NavigationContainer>
       <AppStack.Navigator screenOptions={{headerShown: false}}>
-        <AppStack.Screen name="Lowongan" component={Lowongan} />
-        <AppStack.Screen name="DetailLowongan" component={DetailLowongan} />
+        {/* <AppStack.Screen name="Lowongan" component={Lowongan} />
+        <AppStack.Screen name="DetailLowongan" component={DetailLowongan} /> */}
         {/* Authentication Stack */}
         {!userRole && (
           <>
