@@ -1,23 +1,11 @@
 import React, {FC, useState} from 'react';
-import {CardKeyValue, Gap, Header} from '@components';
+import {CardKeyValue, Gap, Header, NestedCard} from '@components';
 import {color, dimens} from '@constants';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  View,
-  ScrollView,
-} from 'react-native';
-import {Avatar, Button, Card, Subheading, Text} from 'react-native-paper';
+import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
+import {Avatar, Button, Card, Subheading} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
-
-const listApplyingTutor = [
-  {nama: 'Fahrul Firdaus'},
-  {nama: 'Nico Aidin'},
-  {nama: 'Fiqri Akbar'},
-];
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
 export const DetailLes: FC<ScreenProps> = ({navigation}) => {
@@ -35,6 +23,46 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
       // Upload
     }
   };
+
+  const coursePresenceList = [
+    {
+      tanggal: 'Kamis, 02 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+      status: 'selesai',
+    },
+    {
+      tanggal: 'Jumat, 03 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+      status: 'selesai',
+    },
+    {
+      tanggal: 'Sabtu, 04 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+    },
+    {
+      tanggal: 'Minggu, 06 September 2021',
+      waktu: '07:00',
+      tutor: 'Nico Akbar',
+    },
+  ];
+
+  const listApplyingTutor = [
+    {
+      nama: 'Fahrul Firdaus',
+      perguruanTinggi: 'Politeknik Elektronika Negeri Surabaya',
+    },
+    {
+      nama: 'Nico Aidin',
+      perguruanTinggi: 'Universitas Negeri Surabaya',
+    },
+    {
+      nama: 'Fiqri Akbar',
+      perguruanTinggi: 'Universitas Jember',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -110,11 +138,44 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
           <Card.Content>
             {listApplyingTutor.map((item, index) => {
               return (
-                <TutorItem
+                <NestedCard
                   key={index}
-                  item={item}
+                  title={item.nama}
+                  subtitle={item.perguruanTinggi}
                   onPress={() => {
                     navigation.navigate('DetailTutor');
+                  }}
+                  left={props => (
+                    <Avatar.Image
+                      {...props}
+                      size={45}
+                      source={{uri: 'http://placekitten.com/100/100'}}
+                    />
+                  )}
+                />
+              );
+            })}
+          </Card.Content>
+        </Card>
+
+        {/* Tutor presence */}
+        <Card style={{marginTop: dimens.standard}}>
+          <Card.Title
+            title="Presensi Les"
+            titleStyle={{color: '#2563EB'}}
+            subtitle="Klik item untuk melihat detail presensi"
+            subtitleStyle={{fontSize: dimens.medium_14}}
+          />
+          <Card.Content>
+            {coursePresenceList.map((item, index) => {
+              return (
+                <NestedCard
+                  key={index}
+                  title={item.tanggal}
+                  subtitle={item.waktu}
+                  additionalText={item.status && item.status}
+                  onPress={() => {
+                    navigation.navigate('DetailPresensi');
                   }}
                 />
               );
@@ -124,24 +185,6 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
         <Gap y={dimens.standard} />
       </ScrollView>
     </SafeAreaView>
-  );
-};
-
-const TutorItem: FC<{item: any; onPress: () => void}> = ({item, onPress}) => {
-  return (
-    <Card onPress={onPress} style={{marginTop: dimens.standard}}>
-      <Card.Title
-        title={item.nama}
-        subtitle={item.nama}
-        left={props => (
-          <Avatar.Image
-            {...props}
-            size={45}
-            source={{uri: 'http://placekitten.com/100/100'}}
-          />
-        )}
-      />
-    </Card>
   );
 };
 

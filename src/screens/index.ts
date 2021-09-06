@@ -10,3 +10,5 @@ export * from './EditStudent';
 export * from './AddLes';
 export * from './DetailLes';
 export * from './DetailTutor';
+export * from './DetailPresensi';
+export * from './Lowongan';

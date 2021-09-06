@@ -13,8 +13,9 @@ export const CardKeyValue: FC<{
       <Paragraph style={{flex: keyFlex || 6, fontSize: dimens.standard}}>
         {keyName}
       </Paragraph>
-      <Paragraph style={{flex: 10, fontSize: dimens.standard}}>
-        : {value}
+      <Paragraph style={{flex: 0.5, fontSize: dimens.standard}}>:</Paragraph>
+      <Paragraph style={{flex: 8, fontSize: dimens.standard}}>
+        {value}
       </Paragraph>
     </View>
   );

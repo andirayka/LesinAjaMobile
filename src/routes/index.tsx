@@ -9,6 +9,8 @@ import {
   LoginGeneral,
   ListStudents,
   Splash,
+  DetailPresensi,
+  Lowongan,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -46,10 +48,8 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      <AppStack.Navigator
-        screenOptions={{headerShown: false}}
-        // initialRouteName="EditStudent"
-      >
+      <AppStack.Navigator screenOptions={{headerShown: false}}>
+        {/* <AppStack.Screen name="Lowongan" component={Lowongan} /> */}
         {/* Authentication Stack */}
         {!userRole && (
           <>
@@ -68,6 +68,7 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="AddLes" component={AddLes} />
             <AppStack.Screen name="DetailLes" component={DetailLes} />
             <AppStack.Screen name="DetailTutor" component={DetailTutor} />
+            <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
           </>
         )}
       </AppStack.Navigator>
