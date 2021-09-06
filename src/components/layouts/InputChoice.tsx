@@ -19,6 +19,7 @@ export const InputChoice: FC<ComponentProps> = props => {
     props;
   const [modalVisible, setModalVisible] = useState(false);
   const [keyword, setKeyword] = useState('');
+  const [value, setValue] = useState('');
 
   const searchedData = listData.filter(item => {
     // i artinya tidak case sensitive
@@ -56,7 +57,10 @@ export const InputChoice: FC<ComponentProps> = props => {
                     key={index}
                     title={item[keyMenuTitle]}
                     description={keyMenuDescription && item[keyMenuDescription]}
-                    onPress={() => onPressItem(item)}
+                    onPress={() => {
+                      onPressItem(item);
+                      setValue(item[keyMenuTitle]);
+                    }}
                   />
                 );
               })}
@@ -67,6 +71,7 @@ export const InputChoice: FC<ComponentProps> = props => {
 
       <InputText
         {...props}
+        value={value}
         onPressButton={() => setModalVisible(true)}
         errorMessage={errorMessage}
       />

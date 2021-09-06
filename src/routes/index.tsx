@@ -46,7 +46,10 @@ const AppRouter: FC = () => {
 
   return (
     <NavigationContainer>
-      <AppStack.Navigator screenOptions={{headerShown: false}}>
+      <AppStack.Navigator
+        screenOptions={{headerShown: false}}
+        // initialRouteName="EditStudent"
+      >
         {/* Authentication Stack */}
         {!userRole && (
           <>
@@ -55,7 +58,7 @@ const AppRouter: FC = () => {
           </>
         )}
 
-        {/* Parent Tabs */}
+        {/* Parent Stack */}
         {userRole === 'parent' && (
           <>
             <AppStack.Screen name="MainTabs" component={MainTabs} />

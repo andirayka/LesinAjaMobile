@@ -1,3 +1,4 @@
+import {StudentType} from '@constants';
 import {NavigatorScreenParams} from '@react-navigation/native';
 
 export type MainTabParamList = {
@@ -11,7 +12,7 @@ export type AppStackParamList = {
   LoginAdmin: undefined;
   LoginGeneral: undefined;
   ListStudents: undefined;
-  EditStudent: undefined | {item: any};
+  EditStudent: undefined | {item: StudentType};
   AddLes: undefined;
   DetailLes: undefined;
   DetailTutor: undefined;
