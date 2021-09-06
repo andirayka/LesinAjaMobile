@@ -11,6 +11,7 @@ import {
   Splash,
   DetailPresensi,
   Lowongan,
+  DetailLowongan,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -49,7 +50,8 @@ const AppRouter: FC = () => {
   return (
     <NavigationContainer>
       <AppStack.Navigator screenOptions={{headerShown: false}}>
-        {/* <AppStack.Screen name="Lowongan" component={Lowongan} /> */}
+        <AppStack.Screen name="Lowongan" component={Lowongan} />
+        <AppStack.Screen name="DetailLowongan" component={DetailLowongan} />
         {/* Authentication Stack */}
         {!userRole && (
           <>

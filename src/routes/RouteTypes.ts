@@ -17,4 +17,5 @@ export type AppStackParamList = {
   DetailTutor: undefined;
   DetailPresensi: undefined;
   Lowongan: undefined;
+  DetailLowongan: undefined;
 };

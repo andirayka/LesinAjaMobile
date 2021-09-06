@@ -1,8 +1,13 @@
 import React, {FC} from 'react';
-import {Header, Gap, NestedCard} from '@components';
+import {Header, NestedCard, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
-import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
-import {Card} from 'react-native-paper';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  View,
+} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
@@ -30,34 +35,26 @@ export const Lowongan: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Lowongan" />
+      <Header noBackButton title="Lowongan" />
 
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Card>
-          <Card.Title
-            title="Lowongan Les"
-            titleStyle={{alignSelf: 'center'}}
-            subtitle="Pilih lowongan"
-            subtitleStyle={styles.subTitle}
-            style={{marginBottom: dimens.standard}}
-          />
-          <Card.Content>
-            {lowonganList.map((item, index) => {
-              return (
-                <NestedCard
-                  key={index}
-                  title={item.les}
-                  subtitle={`${item.jumlahPertemuan} pertemuan `}
-                  additionalText={`Rp. ${item.gaji}`}
-                  onPress={() => {
-                    navigation.navigate('DetailLowongan');
-                  }}
-                />
-              );
-            })}
-            <Gap y={dimens.standard} />
-          </Card.Content>
-        </Card>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={styles.view}>
+          <OneLineInfo info="Klik item untuk melihat detail" />
+
+          {lowonganList.map((item, index) => {
+            return (
+              <NestedCard
+                key={index}
+                title={item.les}
+                subtitle={`${item.jumlahPertemuan} pertemuan `}
+                additionalText={`Rp. ${item.gaji}`}
+                onPress={() => {
+                  navigation.navigate('DetailLowongan');
+                }}
+              />
+            );
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -68,12 +65,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg_grey,
     flex: 1,
   },
-  scrollView: {
-    flexGrow: 1,
+  view: {
+    flex: 1,
     padding: dimens.standard,
-  },
-  subTitle: {
-    textAlign: 'center',
-    fontSize: dimens.standard,
+    paddingTop: dimens.small,
   },
 });
