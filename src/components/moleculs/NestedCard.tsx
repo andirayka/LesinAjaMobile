@@ -8,7 +8,7 @@ type Props = {
   subtitle: string;
   onPress: () => void;
   left?: (props: object) => ReactNode;
-  status?: string;
+  additionalText?: string;
 };
 
 export const NestedCard: FC<Props> = ({
@@ -16,7 +16,7 @@ export const NestedCard: FC<Props> = ({
   subtitle,
   onPress,
   left,
-  status,
+  additionalText,
 }) => {
   return (
     <Card onPress={onPress} style={{marginTop: dimens.standard}}>
@@ -24,9 +24,15 @@ export const NestedCard: FC<Props> = ({
         title={title}
         subtitle={subtitle}
         left={left}
-        subtitleStyle={{marginBottom: 0, paddingRight: dimens.standard}}
+        subtitleStyle={{
+          marginBottom: 0,
+          paddingRight: dimens.standard,
+          fontSize: dimens.medium_14,
+        }}
       />
-      {status && <Paragraph style={styles.paragraph}>{status}</Paragraph>}
+      {additionalText && (
+        <Paragraph style={styles.paragraph}>{additionalText}</Paragraph>
+      )}
     </Card>
   );
 };

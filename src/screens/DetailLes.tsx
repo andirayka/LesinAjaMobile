@@ -173,7 +173,7 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
                   key={index}
                   title={item.tanggal}
                   subtitle={item.waktu}
-                  status={item.status && item.status}
+                  additionalText={item.status && item.status}
                   onPress={() => {
                     navigation.navigate('DetailPresensi');
                   }}
