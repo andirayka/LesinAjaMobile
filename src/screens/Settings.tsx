@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   settingsItem: {
     justifyContent: 'flex-start',
-    paddingVertical: dimens.tiny_6,
+    paddingVertical: dimens.medium,
   },
   settingsText: {
     fontSize: dimens.standard_18,

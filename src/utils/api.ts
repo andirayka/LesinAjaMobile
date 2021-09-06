@@ -1,4 +1,4 @@
-import {create} from 'apisauce';
+import {CancelToken, create} from 'apisauce';
 import {
   setLocalStorage,
   clearLocalStorage,
@@ -12,6 +12,13 @@ const api = create({
   baseURL: 'http://45.76.149.250:8081/',
 });
 
+// for cancel request
+const source = CancelToken.source();
+
+type ApiGetFuncType = {
+  url: string;
+  params?: object;
+};
 type ApiPostFuncType = {
   url: string;
   payload: object;
@@ -22,6 +29,7 @@ type ApiPostReturnType = {
   data: any;
 };
 
+// Post data to api
 export const apiPost = async ({
   url,
   payload,
@@ -30,13 +38,13 @@ export const apiPost = async ({
   try {
     const loginToken = await getLocalStorage(lsKey.userToken);
 
-    const {ok, data, headers} = await api.post(url, payload, {
+    const {ok, data} = await api.post(url, payload, {
       headers: {Authorization: loginToken},
+      cancelToken: source.token,
     });
 
     // If success
     if (ok) {
-      console.log(data);
       if (isLogin) {
         setLocalStorage(lsKey.userToken, data.data.token);
       }
@@ -47,6 +55,35 @@ export const apiPost = async ({
   } catch (error) {
     return {success: false, data: null};
   }
+};
+
+// Get data from api
+export const apiGet = async ({
+  url,
+  params,
+}: ApiGetFuncType): Promise<ApiPostReturnType> => {
+  try {
+    const loginToken = await getLocalStorage(lsKey.userToken);
+
+    const {ok, data} = await api.get(url, params, {
+      headers: {Authorization: loginToken},
+      cancelToken: source.token,
+    });
+
+    // If success
+    if (ok) {
+      return {success: true, data: data.data};
+    }
+
+    return {success: false, data: null};
+  } catch (error) {
+    return {success: false, data: null};
+  }
+};
+
+// Cancel any request
+export const cancelApiRequest = () => {
+  source.cancel();
 };
 
 // const apiPost = async ({url, data}) => {

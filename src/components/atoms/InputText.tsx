@@ -7,14 +7,13 @@ import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextI
 interface InputProps extends Partial<TextInputProps> {}
 type ComponentProps = InputProps & {
   errorMessage?: string;
-  buttonMode?: boolean;
   onPressButton?: () => void;
 };
 export const InputText: FC<ComponentProps> = props => {
-  const {errorMessage, error, buttonMode, onPressButton} = props;
+  const {errorMessage, error, onPressButton} = props;
 
   // Change view with button, and make textinput disabled
-  if (buttonMode) {
+  if (onPressButton) {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
@@ -34,7 +33,7 @@ export const InputText: FC<ComponentProps> = props => {
   }
 
   return (
-    <View style={{marginBottom: dimens.standard}}>
+    <View style={styles.container}>
       <TextInput {...props} style={styles.textInputStyle} />
 
       {error && (
