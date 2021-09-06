@@ -1,7 +1,13 @@
 import React, {FC} from 'react';
-import {ButtonFormSubmit, Header, InputText} from '@components';
-import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
+import {
+  ButtonFormSubmit,
+  Header,
+  InputChoice,
+  InputRadio,
+  InputText,
+} from '@components';
+import {color, dimens, listJenjangKelas} from '@constants';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -11,32 +17,45 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
+import {apiPost, wait} from '@utils';
+import {Snackbar} from 'react-native-paper';
 
 type FormDataType = {
-  nama: string;
+  siswa: string;
+  jeniskelamin: string;
+  jenjang: string;
+  kelas: string;
   sekolah: string;
-  jenjangKelas: string;
 };
-
 type ScreenProps = StackScreenProps<AppStackParamList, 'EditStudent'>;
-export const EditStudent: FC<ScreenProps> = ({route}) => {
-  const item = route.params?.item || {};
+export const EditStudent: FC<ScreenProps> = ({
+  route,
+  navigation: {navigate},
+}) => {
+  const siswa = route.params?.item;
 
   const {
     control,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isSubmitting},
+    setValue,
   } = useForm<FormDataType>({mode: 'onChange'});
 
-  const onSubmit = async (data: object) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormDataType> = async data => {
+    const {success} = await apiPost({
+      url: 'siswa',
+      payload: data,
+    });
+    if (success) {
+      navigate('ListStudents');
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title={`${item.nama ? 'Ubah' : 'Tambah'} Data Siswa`} />
+      <Header title={`${siswa ? 'Ubah' : 'Tambah'} Data Siswa`} />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
@@ -52,15 +71,56 @@ export const EditStudent: FC<ScreenProps> = ({route}) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                error={!!errors.nama}
+                error={!!errors.siswa}
                 errorMessage="Nama harus diisi"
               />
             )}
-            name="nama"
-            defaultValue={item.nama}
+            name="siswa"
+            defaultValue={siswa && siswa.siswa}
+          />
+          {/* Jenis kelamin  */}
+          <Controller
+            control={control}
+            rules={{required: true}}
+            render={({field: {onChange, value}}) => (
+              <InputRadio
+                label="Jenis Kelamin"
+                value={value}
+                onChange={onChange}
+                radioItems={[
+                  {text: 'Laki-laki', value: 'Laki-laki'},
+                  {text: 'Perempuan', value: 'Perempuan'},
+                ]}
+                error={!!errors.jeniskelamin}
+                errorMessage="Harap masukkan jenis kelamin siswa"
+              />
+            )}
+            name="jeniskelamin"
+            defaultValue={siswa && siswa.jeniskelamin}
+          />
+          {/* Jenjang kelas */}
+          <Controller
+            control={control}
+            rules={{required: true}}
+            render={({field: {onChange, value}}) => (
+              <InputChoice
+                label="Jenjang Kelas"
+                value={value}
+                error={!!errors.jenjang}
+                errorMessage="Harap pilih jenjang kelas siswa"
+                onSelect={item => {
+                  setValue('kelas', item.kelas);
+                  onChange(item.jenjang);
+                }}
+                listData={listJenjangKelas}
+                keyMenuTitle="name"
+              />
+            )}
+            name="jenjang"
+            defaultValue={siswa && siswa.jenjang}
           />
           {/* Sekolah */}
-          <Controller
+          {/* <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
@@ -76,13 +136,21 @@ export const EditStudent: FC<ScreenProps> = ({route}) => {
               />
             )}
             name="sekolah"
-            defaultValue={item.sekolah}
-          />
+            defaultValue={siswa.sekolah}
+          /> */}
         </View>
       </ScrollView>
 
       {/* Submit button */}
-      <ButtonFormSubmit text="Simpan" onPress={handleSubmit(onSubmit)} />
+      <ButtonFormSubmit
+        isLoading={isSubmitting}
+        text="Simpan"
+        onPress={handleSubmit(onSubmit)}
+      />
+
+      {/* <Snackbar visible={true} onDismiss={() => {}}>
+        Berhasil tambah data siswa
+      </Snackbar> */}
     </SafeAreaView>
   );
 };

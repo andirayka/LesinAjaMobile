@@ -60,7 +60,7 @@ const AppRouter: FC = () => {
           </>
         )}
 
-        {/* Parent Tabs */}
+        {/* Parent Stack */}
         {userRole === 'parent' && (
           <>
             <AppStack.Screen name="MainTabs" component={MainTabs} />

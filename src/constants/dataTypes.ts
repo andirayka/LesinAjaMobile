@@ -3,9 +3,13 @@ export type PilihanLesType = {
   harga: string;
 };
 
-export type SiswaType = {
-  nama: string;
-  jenjangKelas: string;
+export type StudentType = {
+  idortu: number;
+  idsiswa: number;
+  jeniskelamin: 'Laki-laki' | 'Perempuan';
+  jenjang: string;
+  kelas: string;
+  siswa: string;
 };
 
 export type DaerahType = {

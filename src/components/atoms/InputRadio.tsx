@@ -1,6 +1,6 @@
 import {dimens} from '@constants';
 import React, {FC} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {HelperText, RadioButton, Text} from 'react-native-paper';
 
 type RadioItem = {
@@ -31,10 +31,14 @@ export const InputRadio: FC<ComponentProps> = ({
         <View style={styles.itemsContainer}>
           {radioItems.map(item => {
             return (
-              <View key={item.value} style={styles.radioTextContainer}>
+              <TouchableOpacity
+                onPress={() => onChange(item.value)}
+                activeOpacity={0.5}
+                key={item.value}
+                style={styles.radioTextContainer}>
                 <RadioButton value={item.value} />
                 <Text style={{fontSize: dimens.standard}}>{item.text}</Text>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </View>

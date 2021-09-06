@@ -81,6 +81,30 @@ export const apiGet = async ({
   }
 };
 
+// Delete data
+export const apiDelete = async ({
+  url,
+  params,
+}: ApiGetFuncType): Promise<ApiPostReturnType> => {
+  try {
+    const loginToken = await getLocalStorage(lsKey.userToken);
+
+    const {ok, data} = await api.delete(url, params, {
+      headers: {Authorization: loginToken},
+      cancelToken: source.token,
+    });
+
+    // If success
+    if (ok) {
+      return {success: true, data: data.data};
+    }
+
+    return {success: false, data: null};
+  } catch (error) {
+    return {success: false, data: null};
+  }
+};
+
 // Cancel any request
 export const cancelApiRequest = () => {
   source.cancel();

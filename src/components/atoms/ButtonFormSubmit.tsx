@@ -5,9 +5,10 @@ import {Button} from 'react-native-paper';
 
 type Props = {
   text: string;
+  isLoading?: boolean;
   onPress: () => void;
 };
-export const ButtonFormSubmit: FC<Props> = ({text, onPress}) => {
+export const ButtonFormSubmit: FC<Props> = ({text, isLoading, onPress}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.select({ios: 'padding', android: 'height'})}>
@@ -21,6 +22,7 @@ export const ButtonFormSubmit: FC<Props> = ({text, onPress}) => {
         }}>
         <Button
           mode="contained"
+          loading={isLoading}
           labelStyle={{fontSize: dimens.medium_14}}
           style={{borderRadius: dimens.medium}}
           contentStyle={{height: 48}}
