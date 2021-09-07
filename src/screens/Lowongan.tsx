@@ -8,10 +8,15 @@ import {
   ScrollView,
   View,
 } from 'react-native';
+import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
 import {StackScreenProps} from '@react-navigation/stack';
-import {AppStackParamList} from '@routes/RouteTypes';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
 
-type ScreenProps = StackScreenProps<AppStackParamList, 'Lowongan'>;
+type ScreenProps = CompositeScreenProps<
+  MaterialBottomTabScreenProps<MainTabParamList, 'Lowongan'>,
+  StackScreenProps<AppStackParamList>
+>;
 export const Lowongan: FC<ScreenProps> = ({navigation}) => {
   const lowonganList = [
     {

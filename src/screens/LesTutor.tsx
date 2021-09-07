@@ -47,17 +47,6 @@ const lesItems: LesType[] = [
     menungguTutor: false,
   },
   {
-    namaLes: 'Mengaji kelas 1 SD',
-    totalPertemuan: 4,
-    pertemuanSelesai: null,
-    tglMulai: null,
-    tglSelesai: null,
-    siswa: 'Andi Rayka',
-    tutor: 'Udin Harun',
-    sudahBayar: false,
-    menungguTutor: false,
-  },
-  {
     namaLes: 'Mengaji kelas 2 SD',
     totalPertemuan: 12,
     pertemuanSelesai: null,
@@ -68,25 +57,13 @@ const lesItems: LesType[] = [
     sudahBayar: false,
     menungguTutor: false,
   },
-  {
-    namaLes: 'Mengaji kelas 6 SD',
-    totalPertemuan: 12,
-    pertemuanSelesai: null,
-    tglMulai: null,
-    tglSelesai: null,
-    siswa: 'Andi Rayka',
-    tutor: null,
-    sudahBayar: false,
-    menungguTutor: true,
-  },
 ];
 
 type ScreenProps = CompositeScreenProps<
-  MaterialBottomTabScreenProps<MainTabParamList, 'Les'>,
+  MaterialBottomTabScreenProps<MainTabParamList, 'LesTutor'>,
   StackScreenProps<AppStackParamList>
 >;
-
-export const Les: FC<ScreenProps> = ({navigation}) => {
+export const LesTutor: FC<ScreenProps> = ({navigation}) => {
   const [isEmptyData, setisEmptyData] = useState(false);
 
   return (
