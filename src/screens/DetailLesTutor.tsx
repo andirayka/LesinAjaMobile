@@ -7,23 +7,8 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {getSingleDocument} from '@utils';
 
-type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLes'>;
-export const DetailLes: FC<ScreenProps> = ({navigation}) => {
-  const [buktiBayar, setBuktiBayar] = useState({
-    path: '',
-  });
-
-  const onPressUploadBuktiBayar = async () => {
-    if (buktiBayar.path === '') {
-      const res = await getSingleDocument();
-      if (res) {
-        setBuktiBayar(prev => ({...prev, path: res.uri}));
-      }
-    } else {
-      // Upload
-    }
-  };
-
+type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLesTutor'>;
+export const DetailLesTutor: FC<ScreenProps> = ({navigation}) => {
   const coursePresenceList = [
     {
       tanggal: 'Kamis, 02 September 2021',
@@ -46,21 +31,6 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
       tanggal: 'Minggu, 06 September 2021',
       waktu: '07:00',
       tutor: 'Nico Akbar',
-    },
-  ];
-
-  const listApplyingTutor = [
-    {
-      nama: 'Fahrul Firdaus',
-      perguruanTinggi: 'Politeknik Elektronika Negeri Surabaya',
-    },
-    {
-      nama: 'Nico Aidin',
-      perguruanTinggi: 'Universitas Negeri Surabaya',
-    },
-    {
-      nama: 'Fiqri Akbar',
-      perguruanTinggi: 'Universitas Jember',
     },
   ];
 
@@ -91,70 +61,16 @@ export const DetailLes: FC<ScreenProps> = ({navigation}) => {
           </Card.Content>
         </Card>
 
-        {/* Pay Les */}
-        <Card style={{marginTop: dimens.standard}}>
-          <Card.Title
-            title="Anda Belum Membayar Biaya Les"
-            subtitle="Biaya Les: Rp 200.000"
-            titleStyle={{color: '#EF4444'}}
-            subtitleStyle={{fontSize: dimens.medium_14}}
-          />
-          {buktiBayar.path !== '' && (
-            <Card.Cover
-              source={{uri: buktiBayar.path}}
-              style={{
-                marginTop: dimens.small,
-                marginHorizontal: dimens.standard,
-              }}
-            />
-          )}
-          <Card.Actions>
-            <Button onPress={onPressUploadBuktiBayar}>
-              {buktiBayar.path === '' ? 'Unggah Bukti Pembayaran' : 'Kirim'}
-            </Button>
-          </Card.Actions>
-        </Card>
-
         {/* There is no applying tutor */}
         <Card style={{marginTop: dimens.standard}}>
           <Card.Title
-            title="Menunggu Ada Tutor"
-            titleStyle={{color: '#2563EB'}}
-          />
-          <Card.Content>
-            <Subheading>Belum ada tutor yang mengambil les ini</Subheading>
-          </Card.Content>
-        </Card>
-
-        {/* Choose Tutor */}
-        <Card style={{marginTop: dimens.standard}}>
-          <Card.Title
-            style={{width: '100%'}}
-            title="Anda Belum Memilih Tutor"
-            subtitle="Klik item untuk melihat detail tutor "
+            title="Menunggu Konfirmasi Walimurid"
             titleStyle={{color: '#F59E0B'}}
-            subtitleStyle={{fontSize: dimens.medium_14}}
           />
           <Card.Content>
-            {listApplyingTutor.map((item, index) => {
-              return (
-                <NestedCard
-                  key={index}
-                  title={item.nama}
-                  subtitle={item.perguruanTinggi}
-                  onPress={() => {
-                    navigation.navigate('DetailTutor');
-                  }}
-                  left={props => (
-                    <Avatar.Image
-                      {...props}
-                      size={45}
-                      source={{uri: 'http://placekitten.com/100/100'}}
-                    />
-                  )}
-                />
-              );
-            })}
+            <Subheading>
+              Menunggu wali murid konfirmasi tutor yang akan mengajar di les ini
+            </Subheading>
           </Card.Content>
         </Card>
 

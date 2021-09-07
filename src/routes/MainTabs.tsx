@@ -11,7 +11,7 @@ export const MainTabs: FC = () => {
     state: {userRole},
   } = useContext(AuthContext);
 
-  if (userRole == 'tutor') {
+  if (userRole == 'parent') {
     return (
       <MainTab.Navigator
         initialRouteName="Home"

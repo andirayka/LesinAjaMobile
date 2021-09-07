@@ -1,12 +1,5 @@
 import React, {FC, useState} from 'react';
-import {
-  CardKeyValue,
-  EmptyData,
-  FABList,
-  Gap,
-  Header,
-  OneLineInfo,
-} from '@components';
+import {CardKeyValue, EmptyData, Header, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
 import {
   SafeAreaView,
@@ -92,23 +85,14 @@ export const LesTutor: FC<ScreenProps> = ({navigation}) => {
                   key={index}
                   item={item}
                   onPress={() => {
-                    navigation.navigate('DetailLes');
+                    navigation.navigate('DetailLesTutor');
                   }}
                 />
               );
             })}
           </>
         )}
-        <Gap y={72} />
       </ScrollView>
-
-      {/* Add button */}
-      <FABList
-        label="Tambah Les Baru"
-        onPress={() => {
-          navigation.navigate('AddLes');
-        }}
-      />
     </SafeAreaView>
   );
 };
@@ -126,14 +110,8 @@ const StudentItem: FC<{item: LesType; onPress: () => void}> = ({
     : '';
 
   const statusData = () => {
-    if (item.menungguTutor) {
-      return {text: 'Menunggu ada tutor', bgColor: '#93C5FD'};
-    }
     if (!item.tutor) {
-      return {text: 'Belum pilih tutor', bgColor: '#FBBF24'};
-    }
-    if (!item.sudahBayar) {
-      return {text: 'Belum bayar les', bgColor: '#F87171'};
+      return {text: 'Menunggu konfirmasi wali murid ', bgColor: '#FBBF24'};
     }
 
     return null;
@@ -148,18 +126,18 @@ const StudentItem: FC<{item: LesType; onPress: () => void}> = ({
 
       <Card.Content>
         <CardKeyValue keyName="Siswa" value={item.siswa} />
-        {item.tutor && <CardKeyValue keyName="Tutor" value={item.tutor} />}
+        {/* {item.tutor && <CardKeyValue keyName="Tutor" value={item.tutor} />}
         {tglMulai && tglSelesai && (
           <>
             <CardKeyValue keyName="Tgl Mulai" value={tglMulai} />
             <CardKeyValue keyName="Tgl Selesai" value={tglSelesai} />
           </>
-        )}
+        )} */}
 
         <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
           {statusData() && (
             <Chip
-              icon="cash-multiple"
+              icon="account-clock"
               style={[
                 styles.chipStatus,
                 {backgroundColor: statusData()?.bgColor},

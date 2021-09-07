@@ -17,7 +17,7 @@ export const DetailPresensi: FC<ScreenProps> = () => {
 
       <Header title="Detail Presensi" />
 
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Card>
           <Card.Title
             title="Presensi Les Siswa Gopi"
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg_grey,
     flex: 1,
   },
-  scrollView: {
+  scrollContainer: {
     flexGrow: 1,
     padding: dimens.standard,
   },

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Header, NestedCard, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
 import {
@@ -18,6 +18,8 @@ type ScreenProps = CompositeScreenProps<
   StackScreenProps<AppStackParamList>
 >;
 export const Lowongan: FC<ScreenProps> = ({navigation}) => {
+  const [isEmptyData, setisEmptyData] = useState(false);
+
   const lowonganList = [
     {
       les: 'Mengaji TK A',
@@ -42,24 +44,22 @@ export const Lowongan: FC<ScreenProps> = ({navigation}) => {
 
       <Header noBackButton title="Lowongan" />
 
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={styles.view}>
-          <OneLineInfo info="Klik item untuk melihat detail" />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <OneLineInfo info="Klik item untuk melihat detail" />
 
-          {lowonganList.map((item, index) => {
-            return (
-              <NestedCard
-                key={index}
-                title={item.les}
-                subtitle={`${item.jumlahPertemuan} pertemuan `}
-                additionalText={`Rp. ${item.gaji}`}
-                onPress={() => {
-                  navigation.navigate('DetailLowongan');
-                }}
-              />
-            );
-          })}
-        </View>
+        {lowonganList.map((item, index) => {
+          return (
+            <NestedCard
+              key={index}
+              title={item.les}
+              subtitle={`${item.jumlahPertemuan} pertemuan `}
+              additionalText={`Rp. ${item.gaji}`}
+              onPress={() => {
+                navigation.navigate('DetailLowongan');
+              }}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg_grey,
     flex: 1,
   },
-  view: {
-    flex: 1,
+  scrollContainer: {
+    flexGrow: 1,
     padding: dimens.standard,
     paddingTop: dimens.small,
   },

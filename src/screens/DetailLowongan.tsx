@@ -1,13 +1,25 @@
 import React, {FC} from 'react';
 import {Header, Gap, CardLabelValue} from '@components';
 import {color, dimens} from '@constants';
-import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
-import {Card, Divider, Paragraph, Button} from 'react-native-paper';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  View,
+} from 'react-native';
+import {Card, Divider, Paragraph, Button, Caption} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
+import dayjs from 'dayjs';
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailLowongan'>;
 export const DetailLowongan: FC<ScreenProps> = () => {
+  const jadwalLes = [
+    1630991440, 1631074240, 1631074240, 1631074240, 1631074240, 1631074240,
+    1631074240, 1631074240,
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
@@ -19,14 +31,8 @@ export const DetailLowongan: FC<ScreenProps> = () => {
           <Card.Title
             title="Gambar Teknik TK B"
             titleStyle={{alignSelf: 'center'}}
-            style={{marginBottom: dimens.standard}}
           />
           <Card.Content>
-            {/* if over */}
-            <Paragraph style={{fontSize: dimens.standard}}>
-              Tanggal mulai: 9 September 2020
-            </Paragraph>
-            <Gap y={dimens.tiny} />
             <Divider />
             <Gap y={dimens.tiny} />
 
@@ -35,12 +41,31 @@ export const DetailLowongan: FC<ScreenProps> = () => {
             <CardLabelValue label="Paket" value="8 Pertemuan" />
             <CardLabelValue label="Paket" value="8 Pertemuan" />
             <CardLabelValue label="Gaji Tutor" value="Rp 300000" />
+            <CardLabelMultipleValue label="Jadwal Les" value={jadwalLes} />
             <Button style={{marginTop: dimens.standard}}>Ambil Lowongan</Button>
             <Gap y={dimens.standard} />
           </Card.Content>
         </Card>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const CardLabelMultipleValue: FC<{
+  label: string;
+  value: Array<number>;
+}> = ({label, value}) => {
+  return (
+    <View style={{marginTop: dimens.medium}}>
+      <Caption style={{fontSize: dimens.standard}}>{label}</Caption>
+      {value.map((item, index) => {
+        return (
+          <Paragraph key={index} style={{fontSize: dimens.medium_14}}>
+            {dayjs.unix(item).format('dddd MMMM YYYY')}
+          </Paragraph>
+        );
+      })}
+    </View>
   );
 };
 
