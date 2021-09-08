@@ -1,13 +1,25 @@
-import React, {FC} from 'react';
-import {Header, Gap, NestedCard} from '@components';
+import React, {FC, useState} from 'react';
+import {Header, NestedCard, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
-import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
-import {Card} from 'react-native-paper';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  View,
+} from 'react-native';
+import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
 import {StackScreenProps} from '@react-navigation/stack';
-import {AppStackParamList} from '@routes/RouteTypes';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
 
-type ScreenProps = StackScreenProps<AppStackParamList, 'Lowongan'>;
+type ScreenProps = CompositeScreenProps<
+  MaterialBottomTabScreenProps<MainTabParamList, 'Lowongan'>,
+  StackScreenProps<AppStackParamList>
+>;
 export const Lowongan: FC<ScreenProps> = ({navigation}) => {
+  const [isEmptyData, setisEmptyData] = useState(false);
+
   const lowonganList = [
     {
       les: 'Mengaji TK A',
@@ -30,34 +42,24 @@ export const Lowongan: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Lowongan" />
+      <Header noBackButton title="Lowongan" />
 
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Card>
-          <Card.Title
-            title="Lowongan Les"
-            titleStyle={{alignSelf: 'center'}}
-            subtitle="Pilih lowongan"
-            subtitleStyle={styles.subTitle}
-            style={{marginBottom: dimens.standard}}
-          />
-          <Card.Content>
-            {lowonganList.map((item, index) => {
-              return (
-                <NestedCard
-                  key={index}
-                  title={item.les}
-                  subtitle={`${item.jumlahPertemuan} pertemuan `}
-                  additionalText={`Rp. ${item.gaji}`}
-                  onPress={() => {
-                    navigation.navigate('DetailLowongan');
-                  }}
-                />
-              );
-            })}
-            <Gap y={dimens.standard} />
-          </Card.Content>
-        </Card>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <OneLineInfo info="Klik item untuk melihat detail" />
+
+        {lowonganList.map((item, index) => {
+          return (
+            <NestedCard
+              key={index}
+              title={item.les}
+              subtitle={`${item.jumlahPertemuan} pertemuan `}
+              additionalText={`Rp. ${item.gaji}`}
+              onPress={() => {
+                navigation.navigate('DetailLowongan');
+              }}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -68,12 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg_grey,
     flex: 1,
   },
-  scrollView: {
+  scrollContainer: {
     flexGrow: 1,
     padding: dimens.standard,
-  },
-  subTitle: {
-    textAlign: 'center',
-    fontSize: dimens.standard,
+    paddingTop: dimens.small,
   },
 });

@@ -12,3 +12,5 @@ export * from './DetailLes';
 export * from './DetailTutor';
 export * from './DetailPresensi';
 export * from './Lowongan';
+export * from './DetailLowongan';
+export * from './LesTutor';

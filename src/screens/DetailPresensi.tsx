@@ -17,7 +17,7 @@ export const DetailPresensi: FC<ScreenProps> = () => {
 
       <Header title="Detail Presensi" />
 
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Card>
           <Card.Title
             title="Presensi Les Siswa Gopi"
@@ -58,7 +58,7 @@ export const DetailPresensi: FC<ScreenProps> = () => {
               keyName="Tutor"
               value="Nico Akbar Prasetyo"
             />
-            <Button style={{marginTop: dimens.small}} icon="pencil-outline">
+            <Button style={{marginTop: dimens.standard}} icon="pencil-outline">
               Edit tanggal pertemuan
             </Button>
             <Gap y={dimens.standard} />
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg_grey,
     flex: 1,
   },
-  scrollView: {
+  scrollContainer: {
     flexGrow: 1,
     padding: dimens.standard,
   },

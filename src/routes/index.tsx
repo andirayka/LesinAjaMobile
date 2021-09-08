@@ -10,7 +10,7 @@ import {
   ListStudents,
   Splash,
   DetailPresensi,
-  Lowongan,
+  DetailLowongan,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,6 +19,7 @@ import {lsKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 import {MainTabs} from './MainTabs';
 import {AppStackParamList} from './RouteTypes';
+import {DetailLesTutor} from '@screens/DetailLesTutor';
 
 const AppStack = createStackNavigator<AppStackParamList>();
 // Main router fo the App
@@ -49,7 +50,6 @@ const AppRouter: FC = () => {
   return (
     <NavigationContainer>
       <AppStack.Navigator screenOptions={{headerShown: false}}>
-        {/* <AppStack.Screen name="Lowongan" component={Lowongan} /> */}
         {/* Authentication Stack */}
         {!userRole && (
           <>
@@ -69,6 +69,14 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="DetailLes" component={DetailLes} />
             <AppStack.Screen name="DetailTutor" component={DetailTutor} />
             <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
+          </>
+        )}
+
+        {/* Tutor Stack */}
+        {userRole === 'parent' && (
+          <>
+            <AppStack.Screen name="DetailLowongan" component={DetailLowongan} />
+            <AppStack.Screen name="DetailLesTutor" component={DetailLesTutor} />
           </>
         )}
       </AppStack.Navigator>

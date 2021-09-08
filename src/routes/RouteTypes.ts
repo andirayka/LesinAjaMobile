@@ -5,7 +5,10 @@ export type MainTabParamList = {
   Home: undefined;
   Les: undefined;
   Settings: undefined;
+  LesTutor: undefined;
+  Lowongan: undefined;
 };
+
 export type AppStackParamList = {
   MainTabs: NavigatorScreenParams<MainTabParamList>;
   Account: undefined;
@@ -17,5 +20,6 @@ export type AppStackParamList = {
   DetailLes: undefined;
   DetailTutor: undefined;
   DetailPresensi: undefined;
-  Lowongan: undefined;
+  DetailLowongan: undefined;
+  DetailLesTutor: undefined;
 };
