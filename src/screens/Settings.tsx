@@ -20,7 +20,10 @@ type ScreenProps = CompositeScreenProps<
   StackScreenProps<AppStackParamList>
 >;
 export const Settings: FC<ScreenProps> = ({navigation}) => {
-  const {logout} = useContext(AuthContext);
+  const {
+    state: {userRole},
+    logout,
+  } = useContext(AuthContext);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,14 +41,16 @@ export const Settings: FC<ScreenProps> = ({navigation}) => {
             }}>
             Ubah Data Pribadi
           </Button>
-          <Button
-            contentStyle={styles.settingsItem}
-            labelStyle={styles.settingsText}
-            onPress={() => {
-              navigation.navigate('ListStudents');
-            }}>
-            Daftar Siswa
-          </Button>
+          {userRole == 'parent' && (
+            <Button
+              contentStyle={styles.settingsItem}
+              labelStyle={styles.settingsText}
+              onPress={() => {
+                navigation.navigate('ListStudents');
+              }}>
+              Daftar Siswa
+            </Button>
+          )}
         </View>
         <Button
           contentStyle={{

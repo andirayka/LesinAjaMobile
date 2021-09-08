@@ -50,7 +50,7 @@ export const MainTabs: FC = () => {
             ),
           }}
         />
-        {/* <MainTab.Screen
+        <MainTab.Screen
           name="Settings"
           component={Settings}
           options={{
@@ -59,7 +59,7 @@ export const MainTabs: FC = () => {
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
-        /> */}
+        />
       </MainTab.Navigator>
     );
   }
