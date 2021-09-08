@@ -82,7 +82,7 @@ const lesItems: LesType[] = [
 ];
 
 type ScreenProps = CompositeScreenProps<
-  MaterialBottomTabScreenProps<MainTabParamList, 'Settings'>,
+  MaterialBottomTabScreenProps<MainTabParamList, 'Les'>,
   StackScreenProps<AppStackParamList>
 >;
 export const Les: FC<ScreenProps> = ({navigation}) => {
