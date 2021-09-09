@@ -5,7 +5,6 @@ import {
   getLocalStorage,
 } from './localStorage';
 import {lsKey} from '@constants';
-// import {navigate} from './navigationRef';
 
 // apisauce instance with base url
 const api = create({

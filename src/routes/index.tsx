@@ -73,7 +73,7 @@ const AppRouter: FC = () => {
         )}
 
         {/* Tutor Stack */}
-        {userRole === 'parent' && (
+        {userRole === 'tutor' && (
           <>
             <AppStack.Screen name="DetailLowongan" component={DetailLowongan} />
             <AppStack.Screen name="DetailLesTutor" component={DetailLesTutor} />
