@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {
   CardKeyValue,
   EmptyData,
@@ -6,6 +6,7 @@ import {
   Gap,
   Header,
   OneLineInfo,
+  SkeletonLoading,
 } from '@components';
 import {color, dimens} from '@constants';
 import {
@@ -21,6 +22,8 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
 import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
+import {apiGet} from '@utils';
+import {useIsFocused} from '@react-navigation/core';
 
 type LesType = {
   namaLes: string;
@@ -87,7 +90,40 @@ type ScreenProps = CompositeScreenProps<
 >;
 
 export const Les: FC<ScreenProps> = ({navigation}) => {
-  const [isEmptyData, setisEmptyData] = useState(false);
+  const [listData, setListData] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    let isActive = true;
+
+    const getInitialData = async () => {
+      const {data}: {data: any} = await apiGet({
+        url: 'paket',
+        params: {
+          page: 1,
+          paket: '',
+          orderBy: 'biaya',
+          sort: 'ASC',
+        },
+      });
+
+      if (isActive) {
+        setListData(data);
+        setIsLoading(false);
+        setIsRefreshing(false);
+      }
+    };
+
+    if (isRefreshing || isLoading || isFocus) {
+      getInitialData();
+    }
+
+    return () => {
+      isActive = false;
+    };
+  }, [isRefreshing, isLoading, isFocus]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -103,7 +139,9 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
       />
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {isEmptyData ? (
+        {isLoading || isRefreshing ? (
+          <SkeletonLoading />
+        ) : listData.length < 1 ? (
           <EmptyData />
         ) : (
           <>

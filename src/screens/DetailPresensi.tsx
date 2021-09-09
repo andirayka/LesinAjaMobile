@@ -1,8 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {Header, Gap, CardKeyValue} from '@components';
 import {color, dimens} from '@constants';
-import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
-import {Card, Divider, Paragraph, Button} from 'react-native-paper';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  View,
+} from 'react-native';
+import {Card, Divider, Paragraph, Button, IconButton} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import dayjs from 'dayjs';
@@ -10,6 +16,14 @@ import dayjs from 'dayjs';
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailPresensi'>;
 export const DetailPresensi: FC<ScreenProps> = () => {
   const tanggalPertemuan = dayjs.unix(1630610037).format('DD MMMM YYYY');
+  const [ratingCount, setRatingCount] = useState(0);
+  const [ratingColor, setRatingColor] = useState(undefined);
+
+  const handleRating = async (count: number) => {
+    setRatingCount(count);
+  };
+
+  useEffect(() => {}, [ratingCount, ratingColor]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,6 +76,35 @@ export const DetailPresensi: FC<ScreenProps> = () => {
               Edit tanggal pertemuan
             </Button>
             <Gap y={dimens.standard} />
+
+            {/* Rating */}
+            <View style={styles.ratingContainer}>
+              <IconButton
+                icon="star"
+                size={30}
+                onPress={() => handleRating(1)}
+              />
+              <IconButton
+                icon="star"
+                size={30}
+                onPress={() => handleRating(2)}
+              />
+              <IconButton
+                icon="star"
+                size={30}
+                onPress={() => handleRating(3)}
+              />
+              <IconButton
+                icon="star"
+                size={30}
+                onPress={() => handleRating(4)}
+              />
+              <IconButton
+                icon="star"
+                size={30}
+                onPress={() => handleRating(5)}
+              />
+            </View>
           </Card.Content>
         </Card>
       </ScrollView>
@@ -87,5 +130,9 @@ const styles = StyleSheet.create({
     fontSize: dimens.standard,
     marginTop: dimens.small,
     color: color.green_500,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
