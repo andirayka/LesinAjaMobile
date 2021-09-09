@@ -26,10 +26,11 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
 type FormDataType = {
-  pilihanles: string;
-  preferensiTutor: '' | 'laki-laki' | 'perempuan' | 'bebas';
-  siswa: string;
-  jadwalLes: {waktu: number}[];
+  idpaket: number;
+  idsiswa: number;
+  tglles: string; // 2021-09-01
+  jamles: string;
+  hari: string; // SENIN,SELASA,RABU,JUMAT
 };
 type ScreenProps = StackScreenProps<AppStackParamList>;
 export const AddLes: FC<ScreenProps> = ({navigation}) => {
@@ -52,7 +53,7 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
           {/* Siswa */}
-          <Controller
+          {/* <Controller
             control={control}
             rules={{required: true}}
             render={({field: {onChange, value}}) => (
@@ -69,7 +70,7 @@ export const AddLes: FC<ScreenProps> = ({navigation}) => {
             )}
             name="siswa"
             defaultValue={''}
-          />
+          /> */}
 
           {/* Pilihan les */}
           <Controller

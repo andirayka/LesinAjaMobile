@@ -1,5 +1,5 @@
 import {color, dimens} from '@constants';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {HelperText, TextInput} from 'react-native-paper';
 import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
@@ -8,9 +8,11 @@ interface InputProps extends Partial<TextInputProps> {}
 type ComponentProps = InputProps & {
   errorMessage?: string;
   onPressButton?: () => void;
+  passwordMode?: boolean;
 };
 export const InputText: FC<ComponentProps> = props => {
-  const {errorMessage, error, onPressButton} = props;
+  const [showPassword, setShowPassword] = useState(false);
+  const {errorMessage, error, onPressButton, passwordMode} = props;
 
   // Change view with button, and make textinput disabled
   if (onPressButton) {
@@ -34,7 +36,19 @@ export const InputText: FC<ComponentProps> = props => {
 
   return (
     <View style={styles.container}>
-      <TextInput {...props} style={styles.textInputStyle} />
+      <TextInput
+        {...props}
+        style={styles.textInputStyle}
+        secureTextEntry={!showPassword}
+        right={
+          passwordMode && (
+            <TextInput.Icon
+              name={!showPassword ? 'eye' : 'eye-off'}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          )
+        }
+      />
 
       {error && (
         <HelperText
