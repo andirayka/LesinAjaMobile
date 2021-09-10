@@ -100,12 +100,11 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
 
     const getInitialData = async () => {
       const {data}: {data: any} = await apiGet({
-        url: 'paket',
+        url: 'les/histori',
         params: {
+          orderBy: 'siswa',
+          sort: 'desc',
           page: 1,
-          paket: '',
-          orderBy: 'biaya',
-          sort: 'ASC',
         },
       });
 
@@ -113,6 +112,7 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
         setListData(data);
         setIsLoading(false);
         setIsRefreshing(false);
+        console.log(listData);
       }
     };
 

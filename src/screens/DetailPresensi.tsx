@@ -78,6 +78,12 @@ export const DetailPresensi: FC<ScreenProps> = () => {
             <Gap y={dimens.standard} />
 
             {/* Rating */}
+            <Card.Title
+              title="Rating Tutor"
+              titleStyle={{alignSelf: 'center'}}
+              subtitle="Rating berdasarkan kinerja tutor"
+              subtitleStyle={styles.subTitle}
+            />
             <View style={styles.ratingContainer}>
               <IconButton
                 icon="star"
