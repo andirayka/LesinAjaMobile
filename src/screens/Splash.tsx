@@ -7,7 +7,7 @@ import {Gap} from '@components';
 export const Splash: FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="white" />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       {/* Logo */}
       <View style={styles.logoContainer}>

@@ -13,7 +13,7 @@ type ScreenProps = CompositeScreenProps<
 export const Home: FC<ScreenProps> = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="white" />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <Title style={{color: 'black'}}>Home</Title>
       {/* <Button title="Home" /> */}
     </SafeAreaView>

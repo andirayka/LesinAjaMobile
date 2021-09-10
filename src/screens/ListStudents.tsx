@@ -28,10 +28,7 @@ export const ListStudents: FC<ScreenProps> = ({navigation: {navigate}}) => {
   const [listData, setListData] = useState<StudentType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState({
-    id: 0,
-    nama: '',
-  });
+  const [selectedStudent, setSelectedStudent] = useState({id: 0, nama: ''});
   const isFocus = useIsFocused();
 
   useEffect(() => {
