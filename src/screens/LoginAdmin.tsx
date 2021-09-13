@@ -26,7 +26,7 @@ export const LoginAdmin: FC = () => {
     // if (success) {
     //   alert('Login admin sukses');
     // }
-    // setUserRole('admin');
+    setUserRole('admin', true);
   };
 
   return (
