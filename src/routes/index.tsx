@@ -18,6 +18,7 @@ import {clearLocalStorage, getLocalStorage} from '@utils';
 import {lsKey} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 import {MainTabs} from './MainTabs';
+import {AdminDrawer} from './AdminDrawer';
 import {AppStackParamList} from './RouteTypes';
 import {DetailLesTutor} from '@screens/DetailLesTutor';
 
@@ -57,7 +58,12 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="LoginAdmin" component={LoginAdmin} />
           </>
         )}
-
+        {/* Admin Stack */}
+        {userRole === 'admin' && (
+          <>
+            <AppStack.Screen name="AdminDrawer" component={AdminDrawer} />
+          </>
+        )}
         {/* Parent Stack */}
         {userRole === 'parent' && (
           <>
@@ -71,7 +77,6 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
           </>
         )}
-
         {/* Tutor Stack */}
         {userRole === 'tutor' && (
           <>

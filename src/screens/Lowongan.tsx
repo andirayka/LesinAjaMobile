@@ -1,13 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Header, NestedCard, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  ScrollView,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
 import {AppStackParamList, MainTabParamList} from '@routes/RouteTypes';
 import {StackScreenProps} from '@react-navigation/stack';
 import {CompositeScreenProps} from '@react-navigation/native';
@@ -17,9 +11,8 @@ type ScreenProps = CompositeScreenProps<
   MaterialBottomTabScreenProps<MainTabParamList, 'Lowongan'>,
   StackScreenProps<AppStackParamList>
 >;
-export const Lowongan: FC<ScreenProps> = ({navigation}) => {
-  const [isEmptyData, setisEmptyData] = useState(false);
 
+export const Lowongan: FC<ScreenProps> = ({navigation}) => {
   const lowonganList = [
     {
       les: 'Mengaji TK A',

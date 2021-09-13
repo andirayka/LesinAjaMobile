@@ -15,6 +15,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import AppRouter from '@routes';
 import AppContextProvider from '@context';
+import 'react-native-gesture-handler';
 
 // to indicate that inactive screens should be detached from the view hierarchy to save memory
 enableScreens();
