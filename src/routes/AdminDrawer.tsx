@@ -6,6 +6,8 @@ import {
 } from '@react-navigation/drawer';
 import {Les, Lowongan} from '@screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Title} from 'react-native-paper';
+import {dimens} from '@constants';
 
 const DrawerContainer = createDrawerNavigator();
 
@@ -16,6 +18,7 @@ export const AdminDrawer = () => {
       screenOptions={{
         drawerActiveTintColor: '#000',
         drawerActiveBackgroundColor: '#FCD34D',
+        headerShown: false,
       }}>
       <DrawerContainer.Screen
         name="Beranda"
@@ -86,9 +89,13 @@ export const AdminDrawer = () => {
   );
 };
 
-const CustomDrawerContent = props => {
+const CustomDrawerContent = (props: any) => {
   return (
     <DrawerContentScrollView {...props}>
+      <Title
+        style={{marginLeft: dimens.small_10, marginBottom: dimens.small_10}}>
+        Halo Admin
+      </Title>
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
