@@ -8,15 +8,7 @@ import {
   View,
 } from 'react-native';
 import {AuthContext} from '@context/AuthContext';
-import {
-  Button,
-  Dialog,
-  Paragraph,
-  Portal,
-  Subheading,
-  Text,
-  Title,
-} from 'react-native-paper';
+import {Button, Subheading, Text, Title} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 import {dimens} from '@constants';
