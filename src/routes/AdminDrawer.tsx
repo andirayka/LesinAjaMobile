@@ -5,11 +5,12 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import {Les, Lowongan} from '@screens';
+import {Les, Lowongan, Home} from '@screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Title} from 'react-native-paper';
 import {dimens} from '@constants';
 import {AuthContext} from '@context/AuthContext';
+import {ListTutor} from '@screens/ListTutor';
 
 const DrawerContainer = createDrawerNavigator();
 
@@ -24,14 +25,14 @@ export const AdminDrawer = () => {
       }}>
       <DrawerContainer.Screen
         name="Beranda"
-        component={Lowongan}
+        component={ListTutor}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="home" size={26} />,
         }}
       />
       <DrawerContainer.Screen
         name="Data Master"
-        component={Les}
+        component={ListTutor}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="database" size={26} />
@@ -40,7 +41,7 @@ export const AdminDrawer = () => {
       />
       <DrawerContainer.Screen
         name="Daftar Tutor"
-        component={Les}
+        component={ListTutor}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="teach" size={26} />,
         }}

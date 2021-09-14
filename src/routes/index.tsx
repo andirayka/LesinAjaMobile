@@ -62,6 +62,7 @@ const AppRouter: FC = () => {
         {userRole === 'admin' && (
           <>
             <AppStack.Screen name="AdminDrawer" component={AdminDrawer} />
+            <AppStack.Screen name="DetailTutor" component={DetailTutor} />
           </>
         )}
         {/* Parent Stack */}

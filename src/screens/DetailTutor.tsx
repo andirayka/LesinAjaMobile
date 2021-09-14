@@ -1,13 +1,18 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import {ButtonFormSubmit, CardLabelValue, Gap, Header} from '@components';
 import {color, dimens} from '@constants';
 import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
 import {Avatar, Card, Divider, Subheading, Title} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
+import {AuthContext} from '@context/AuthContext';
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailTutor'>;
 export const DetailTutor: FC<ScreenProps> = ({navigation}) => {
+  const {
+    state: {userRole},
+  } = useContext(AuthContext);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
@@ -32,6 +37,7 @@ export const DetailTutor: FC<ScreenProps> = ({navigation}) => {
           <Gap y={dimens.tiny} />
 
           {/* More data */}
+          <CardLabelValue label="Jenis Kelamin" value="Laki - Laki" />
           <CardLabelValue
             label="Perguruan Tinggi"
             value="Universitas Teknologi Sepuluh November"
@@ -41,6 +47,17 @@ export const DetailTutor: FC<ScreenProps> = ({navigation}) => {
             label="Alamat"
             value="Jl.Kenari No 37, RT 004, RW 036, Desa Arjosari, Kecamatan Kalipare, Kabupaten Malang, Provinsi Jawa Timur"
           />
+
+          {/* This data only exist in admin page */}
+          {userRole == 'admin' && (
+            <>
+              <CardLabelValue label="Email" value="abdmlk@gmail.com" />
+              <CardLabelValue label="Nomor WA" value="089778664331" />
+              <CardLabelValue label="Bank" value="BCA" />
+              <CardLabelValue label="Rekening" value="0001119998" />
+            </>
+          )}
+
           <CardLabelValue
             label="Pengalaman Mengajar"
             value="Banyak sekali pengalaman yang sangat berharga saat mengajar di kelas I Sekolah Dasar. Salah satunya adalah latar belakang siswa yang berbeda, ada yang cerdas namun pemalu atau kurang percaya diri, ada yang hiperaktif tapi dalam akademik saat diberikan tugas ia kurang menyukainya, dan ada pula yang selalu cari perhatian dan keinginannya harus selalu dituruti.\nDengan berbagai perasaan yang bercampur aduk saya ditempatkan di kelas 2. Karena pada saat itu, mereka guru-guru senior disana melihat latar belakang saya adalah seorang yang berpengalaman karena sudah pernah mengajar di TK."
@@ -53,7 +70,9 @@ export const DetailTutor: FC<ScreenProps> = ({navigation}) => {
         </Card>
       </ScrollView>
       {/* Submit button */}
-      <ButtonFormSubmit text="Pilih Tutor" onPress={() => {}} />
+      {userRole == 'parent' && (
+        <ButtonFormSubmit text="Pilih Tutor" onPress={() => {}} />
+      )}
     </SafeAreaView>
   );
 };
