@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
 import {Les, Lowongan} from '@screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Title} from 'react-native-paper';
 import {dimens} from '@constants';
+import {AuthContext} from '@context/AuthContext';
 
 const DrawerContainer = createDrawerNavigator();
 
@@ -73,15 +75,8 @@ export const AdminDrawer = () => {
           drawerIcon: () => (
             <MaterialCommunityIcons name="file-document" size={26} />
           ),
-        }}
-      />
-      <DrawerContainer.Screen
-        name="Keluar"
-        component={Les}
-        options={{
-          drawerIcon: () => <MaterialCommunityIcons name="logout" size={26} />,
           drawerItemStyle: {
-            marginTop: '120%',
+            marginBottom: 300,
           },
         }}
       />
@@ -90,6 +85,8 @@ export const AdminDrawer = () => {
 };
 
 const CustomDrawerContent = (props: any) => {
+  const {logout} = useContext(AuthContext);
+
   return (
     <DrawerContentScrollView {...props}>
       <Title
@@ -97,6 +94,11 @@ const CustomDrawerContent = (props: any) => {
         Halo Admin
       </Title>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Keluar"
+        onPress={logout}
+        icon={() => <MaterialCommunityIcons name="logout" size={26} />}
+      />
     </DrawerContentScrollView>
   );
 };
