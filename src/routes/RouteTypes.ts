@@ -9,7 +9,9 @@ export type MainTabParamList = {
   Lowongan: undefined;
 };
 
-export type AdminDrawerParamList = {};
+export type AdminDrawerParamList = {
+  HomeAdmin: undefined;
+};
 
 export type AppStackParamList = {
   MainTabs: NavigatorScreenParams<MainTabParamList>;

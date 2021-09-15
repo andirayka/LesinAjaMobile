@@ -4,10 +4,11 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {Les, Lowongan} from '@screens';
+import {HomeAdmin, Les} from '@screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AdminDrawerParamList} from './RouteTypes';
 
-const DrawerContainer = createDrawerNavigator();
+const DrawerContainer = createDrawerNavigator<AdminDrawerParamList>();
 
 export const AdminDrawer = () => {
   return (
@@ -18,8 +19,8 @@ export const AdminDrawer = () => {
         drawerActiveBackgroundColor: '#FCD34D',
       }}>
       <DrawerContainer.Screen
-        name="Beranda"
-        component={Lowongan}
+        name="HomeAdmin"
+        component={HomeAdmin}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="home" size={26} />,
         }}
