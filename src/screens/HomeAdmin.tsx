@@ -9,7 +9,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Button, DataTable, Text} from 'react-native-paper';
+import {Button, Card, DataTable, Text} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AdminDrawerParamList, AppStackParamList} from '@routes/RouteTypes';
 import {CompositeScreenProps} from '@react-navigation/core';
@@ -37,7 +37,7 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
       keterangan: '5',
     },
     {
-      nama: 'Instagram',
+      nama: 'Instagram inst ',
       efektivitas: '10%',
       keterangan: '5',
     },
@@ -61,18 +61,29 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title>Sosial Media</DataTable.Title>
-              <DataTable.Title>Efektivitas</DataTable.Title>
-              <DataTable.Title numberOfLines={2}>
-                Jumlah Wali Murid
-              </DataTable.Title>
-            </DataTable.Header>
-            {socialMedia.map(item => {
-              return <SocialMediaRow key={item.nama} item={item} />;
-            })}
-          </DataTable>
+          <Card>
+            <ScrollView horizontal>
+              <DataTable>
+                <DataTable.Header>
+                  <DataTable.Title style={{minWidth: 100}}>
+                    Sosial Media
+                  </DataTable.Title>
+                  <DataTable.Title style={{minWidth: 100}}>
+                    Efektivitas
+                  </DataTable.Title>
+                  <DataTable.Title style={{minWidth: 100}}>
+                    Jumlah Wali Murid murid murid
+                  </DataTable.Title>
+                </DataTable.Header>
+                {socialMedia.map(item => {
+                  return <SocialMediaRow key={item.nama} item={item} />;
+                })}
+              </DataTable>
+            </ScrollView>
+          </Card>
+          <Card style={{marginTop: 500}}>
+            <Card.Title title="ji" />
+          </Card>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -82,9 +93,11 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
 const SocialMediaRow: FC<{item: SocialMediaType}> = ({item}) => {
   return (
     <DataTable.Row>
-      <DataTable.Cell>{item.nama}</DataTable.Cell>
-      <DataTable.Cell>{item.efektivitas}</DataTable.Cell>
-      <DataTable.Cell>{item.keterangan}</DataTable.Cell>
+      <DataTable.Cell style={{minWidth: 100}}>{item.nama}</DataTable.Cell>
+      <DataTable.Cell style={{minWidth: 100}}>
+        {item.efektivitas}
+      </DataTable.Cell>
+      <DataTable.Cell style={{minWidth: 100}}>{item.keterangan}</DataTable.Cell>
     </DataTable.Row>
   );
 };
