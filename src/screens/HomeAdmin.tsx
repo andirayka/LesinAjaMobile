@@ -57,7 +57,7 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Beranda" />
+      <Header drawerButton noBackButton title="Beranda" />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
@@ -65,7 +65,9 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
             <DataTable.Header>
               <DataTable.Title>Sosial Media</DataTable.Title>
               <DataTable.Title>Efektivitas</DataTable.Title>
-              <DataTable.Title>Jumlah Wali Murid</DataTable.Title>
+              <DataTable.Title numberOfLines={2}>
+                Jumlah Wali Murid
+              </DataTable.Title>
             </DataTable.Header>
             {socialMedia.map(item => {
               return <SocialMediaRow key={item.nama} item={item} />;

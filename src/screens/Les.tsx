@@ -140,7 +140,7 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {isLoading || isRefreshing ? (
           <SkeletonLoading />
-        ) : listData.length < 1 ? (
+        ) : listData || listData.length < 1 ? (
           <EmptyData />
         ) : (
           <>

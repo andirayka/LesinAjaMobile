@@ -59,14 +59,6 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="LoginAdmin" component={LoginAdmin} />
           </>
         )}
-        {/* Walmur & Tutor Stack */}
-        {userRole != 'admin' && (
-          <>
-            <AppStack.Screen name="MainTabs" component={MainTabs} />
-            <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
-            <AppStack.Screen name="Account" component={Account} />
-          </>
-        )}
         {/* Admin Stack */}
         {userRole === 'admin' && (
           <>
@@ -78,18 +70,24 @@ const AppRouter: FC = () => {
         {/* Parent Stack */}
         {userRole === 'parent' && (
           <>
+            <AppStack.Screen name="MainTabs" component={MainTabs} />
             <AppStack.Screen name="ListStudents" component={ListStudents} />
             <AppStack.Screen name="EditStudent" component={EditStudent} />
             <AppStack.Screen name="AddLes" component={AddLes} />
             <AppStack.Screen name="DetailLes" component={DetailLes} />
             <AppStack.Screen name="DetailTutor" component={DetailTutor} />
+            <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
+            <AppStack.Screen name="Account" component={Account} />
           </>
         )}
         {/* Tutor Stack */}
         {userRole === 'tutor' && (
           <>
+            <AppStack.Screen name="MainTabs" component={MainTabs} />
             <AppStack.Screen name="DetailLesTutor" component={DetailLesTutor} />
             <AppStack.Screen name="DetailLowongan" component={DetailLowongan} />
+            <AppStack.Screen name="DetailPresensi" component={DetailPresensi} />
+            <AppStack.Screen name="Account" component={Account} />
           </>
         )}
       </AppStack.Navigator>

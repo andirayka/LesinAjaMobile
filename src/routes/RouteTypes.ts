@@ -13,6 +13,7 @@ export type AdminDrawerParamList = {
   HomeAdmin: undefined;
   ListTutor: undefined;
   ListWalmur: undefined;
+  ListMaster: undefined;
 };
 
 export type AppStackParamList = {
