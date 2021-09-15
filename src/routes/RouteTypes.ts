@@ -10,6 +10,7 @@ export type MainTabParamList = {
 };
 
 export type AdminDrawerParamList = {
+  HomeAdmin: undefined;
   ListTutor: undefined;
   ListWalmur: undefined;
 };

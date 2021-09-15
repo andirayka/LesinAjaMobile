@@ -5,13 +5,14 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import {Les, ListTutor, ListWalmur} from '@screens';
+import {HomeAdmin, Les, ListTutor, ListWalmur} from '@screens';
+import {AdminDrawerParamList} from './RouteTypes';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Title} from 'react-native-paper';
 import {dimens} from '@constants';
 import {AuthContext} from '@context/AuthContext';
 
-const DrawerContainer = createDrawerNavigator();
+const DrawerContainer = createDrawerNavigator<AdminDrawerParamList>();
 
 export const AdminDrawer = () => {
   return (
@@ -23,8 +24,8 @@ export const AdminDrawer = () => {
         headerShown: false,
       }}>
       <DrawerContainer.Screen
-        name="Beranda"
-        component={ListTutor}
+        name="HomeAdmin"
+        component={HomeAdmin}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="home" size={26} />,
         }}
