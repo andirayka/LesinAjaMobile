@@ -112,7 +112,6 @@ export const Les: FC<ScreenProps> = ({navigation}) => {
         setListData(data);
         setIsLoading(false);
         setIsRefreshing(false);
-        console.log(listData);
       }
     };
 

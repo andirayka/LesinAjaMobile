@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
-import {HomeAdmin, Les} from '@screens';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {HomeAdmin, Les, ListTutor, ListWalmur} from '@screens';
 import {AdminDrawerParamList} from './RouteTypes';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Title} from 'react-native-paper';
+import {dimens} from '@constants';
+import {AuthContext} from '@context/AuthContext';
 
 const DrawerContainer = createDrawerNavigator<AdminDrawerParamList>();
 
@@ -17,6 +21,7 @@ export const AdminDrawer = () => {
       screenOptions={{
         drawerActiveTintColor: '#000',
         drawerActiveBackgroundColor: '#FCD34D',
+        headerShown: false,
       }}>
       <DrawerContainer.Screen
         name="HomeAdmin"
@@ -27,7 +32,7 @@ export const AdminDrawer = () => {
       />
       <DrawerContainer.Screen
         name="Data Master"
-        component={Les}
+        component={ListTutor}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="database" size={26} />
@@ -36,14 +41,14 @@ export const AdminDrawer = () => {
       />
       <DrawerContainer.Screen
         name="Daftar Tutor"
-        component={Les}
+        component={ListTutor}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="teach" size={26} />,
         }}
       />
       <DrawerContainer.Screen
         name="Daftar Wali Murid"
-        component={Les}
+        component={ListWalmur}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="account-child" size={26} />
@@ -71,15 +76,8 @@ export const AdminDrawer = () => {
           drawerIcon: () => (
             <MaterialCommunityIcons name="file-document" size={26} />
           ),
-        }}
-      />
-      <DrawerContainer.Screen
-        name="Keluar"
-        component={Les}
-        options={{
-          drawerIcon: () => <MaterialCommunityIcons name="logout" size={26} />,
           drawerItemStyle: {
-            marginTop: '120%',
+            marginBottom: 300,
           },
         }}
       />
@@ -87,10 +85,21 @@ export const AdminDrawer = () => {
   );
 };
 
-const CustomDrawerContent = props => {
+const CustomDrawerContent = (props: any) => {
+  const {logout} = useContext(AuthContext);
+
   return (
     <DrawerContentScrollView {...props}>
+      <Title
+        style={{marginLeft: dimens.small_10, marginBottom: dimens.small_10}}>
+        Halo Admin
+      </Title>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Keluar"
+        onPress={logout}
+        icon={() => <MaterialCommunityIcons name="logout" size={26} />}
+      />
     </DrawerContentScrollView>
   );
 };
