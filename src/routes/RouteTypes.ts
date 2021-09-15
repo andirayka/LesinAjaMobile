@@ -11,6 +11,7 @@ export type MainTabParamList = {
 
 export type AdminDrawerParamList = {
   ListTutor: undefined;
+  ListWalmur: undefined;
 };
 
 export type AppStackParamList = {
@@ -27,4 +28,5 @@ export type AppStackParamList = {
   DetailPresensi: undefined;
   DetailLowongan: undefined;
   DetailLesTutor: undefined;
+  DetailWalmur: undefined;
 };

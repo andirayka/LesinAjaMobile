@@ -9,35 +9,35 @@ import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-ta
 import {Card} from 'react-native-paper';
 
 type ScreenProps = CompositeScreenProps<
-  MaterialBottomTabScreenProps<AdminDrawerParamList, 'ListTutor'>,
+  MaterialBottomTabScreenProps<AdminDrawerParamList, 'ListWalmur'>,
   StackScreenProps<AppStackParamList>
 >;
 
-export const ListTutor: FC<ScreenProps> = ({navigation}) => {
-  const tutorList = [
+export const ListWalmur: FC<ScreenProps> = ({navigation}) => {
+  const walmurList = [
     {
-      nama: 'Nico Prakoso',
-      email: 'nico@null.net',
-      nomorWhatsApp: '089778889331',
-      alamat: 'bojong kidul',
+      nama: 'Hari Wibowo',
+      email: 'hari@gmail.com',
+      nomorWhatsApp: '089889889331',
+      alamat: 'durian runtuh',
     },
     {
-      nama: 'Akbar Wibowo',
-      email: 'akbar@void.net',
-      nomorWhatsApp: '089778889331',
-      alamat: 'bojong lor',
+      nama: 'Ari Jayanto',
+      email: 'arj@void.net',
+      nomorWhatsApp: '08977888988',
+      alamat: 'cipete',
     },
     {
-      nama: 'Prasetyo',
-      email: 'pras@lewd.net',
+      nama: 'Heri Heru',
+      email: 'hh@lewd.net',
       nomorWhatsApp: '089778889331',
-      alamat: 'bojong utara',
+      alamat: 'cisarua',
     },
     {
-      nama: 'Wendy Akbar',
-      email: 'wendy@mock.net',
+      nama: 'Sitikus',
+      email: 'stk@mock.net',
       nomorWhatsApp: '089778889331',
-      alamat: 'bojong tenggara',
+      alamat: 'wonoplintahan',
     },
   ];
 
@@ -48,18 +48,18 @@ export const ListTutor: FC<ScreenProps> = ({navigation}) => {
       <Header
         noBackButton
         withFilter
-        title="Daftar Tutor"
+        title="Daftar Wali Murid"
         onPressFilter={() => {}}
       />
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <OneLineInfo info="Klik item untuk melihat detail" />
-        {tutorList.map((item, index) => {
+        {walmurList.map((item, index) => {
           return (
             <Card
               key={index}
               style={{marginTop: dimens.standard}}
-              onPress={() => navigation.navigate('DetailTutor')}>
+              onPress={() => navigation.navigate('DetailWalmur')}>
               <Card.Title title={item.nama} />
               <Card.Content>
                 <CardKeyValue keyName="Nama" value={item.nama} />

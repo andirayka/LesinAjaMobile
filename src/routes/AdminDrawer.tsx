@@ -5,12 +5,11 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import {Les, Lowongan, Home} from '@screens';
+import {Les, ListTutor, ListWalmur} from '@screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Title} from 'react-native-paper';
 import {dimens} from '@constants';
 import {AuthContext} from '@context/AuthContext';
-import {ListTutor} from '@screens/ListTutor';
 
 const DrawerContainer = createDrawerNavigator();
 
@@ -48,7 +47,7 @@ export const AdminDrawer = () => {
       />
       <DrawerContainer.Screen
         name="Daftar Wali Murid"
-        component={Les}
+        component={ListWalmur}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="account-child" size={26} />

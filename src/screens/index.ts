@@ -14,3 +14,7 @@ export * from './DetailPresensi';
 export * from './Lowongan';
 export * from './DetailLowongan';
 export * from './LesTutor';
+export * from './ListTutor';
+export * from './DetailTutor';
+export * from './ListWalmur';
+export * from './DetailWalmur';
