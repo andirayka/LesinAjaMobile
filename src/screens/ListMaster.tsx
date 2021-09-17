@@ -29,7 +29,11 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         <OneLineInfo info="Klik item untuk melihat detail" />
         <Card
           style={styles.card}
-          onPress={() => navigation.navigate('DetailTutor')}>
+          onPress={() =>
+            navigation.navigate('DetailListMaster', {
+              detailType: 'Jenjang Kelas',
+            })
+          }>
           <Card.Title
             title="Master Jenjang Kelas"
             subtitle="untuk mengelola data yang berkaitan dengan jenjang kelas"
@@ -38,7 +42,9 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         </Card>
         <Card
           style={styles.card}
-          onPress={() => navigation.navigate('DetailTutor')}>
+          onPress={() =>
+            navigation.navigate('DetailListMaster', {detailType: 'Mapel'})
+          }>
           <Card.Title
             title="Master Mapel"
             subtitle="untuk mengelola data yang berkaitan dengan mapel"
@@ -47,7 +53,9 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         </Card>
         <Card
           style={styles.card}
-          onPress={() => navigation.navigate('DetailTutor')}>
+          onPress={() =>
+            navigation.navigate('DetailListMaster', {detailType: 'Paket'})
+          }>
           <Card.Title
             title="Master Paket"
             subtitle="untuk mengelola data yang berkaitan dengan paket"
@@ -56,7 +64,9 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         </Card>
         <Card
           style={styles.card}
-          onPress={() => navigation.navigate('DetailTutor')}>
+          onPress={() =>
+            navigation.navigate('DetailListMaster', {detailType: 'Wilayah'})
+          }>
           <Card.Title
             title="Master Wilayah"
             subtitle="untuk mengelola data yang berkaitan dengan wilayah"

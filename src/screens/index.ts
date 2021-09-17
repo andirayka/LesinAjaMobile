@@ -20,3 +20,4 @@ export * from './DetailTutor';
 export * from './ListWalmur';
 export * from './DetailWalmur';
 export * from './ListMaster';
+export * from './DetailListMaster';

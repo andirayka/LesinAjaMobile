@@ -12,6 +12,7 @@ import {
   DetailPresensi,
   DetailLowongan,
   DetailWalmur,
+  DetailListMaster,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -65,6 +66,10 @@ const AppRouter: FC = () => {
             <AppStack.Screen name="AdminDrawer" component={AdminDrawer} />
             <AppStack.Screen name="DetailTutor" component={DetailTutor} />
             <AppStack.Screen name="DetailWalmur" component={DetailWalmur} />
+            <AppStack.Screen
+              name="DetailListMaster"
+              component={DetailListMaster}
+            />
           </>
         )}
         {/* Parent Stack */}
