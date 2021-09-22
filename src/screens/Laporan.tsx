@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import {CardKeyValue, Gap, Header} from '@components';
 import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -9,15 +8,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {
-  Button,
-  Card,
-  DataTable,
-  FAB,
-  Portal,
-  Provider,
-  Text,
-} from 'react-native-paper';
+import {Card, DataTable, FAB, Portal, Provider} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AdminDrawerParamList, AppStackParamList} from '@routes/RouteTypes';
 import {CompositeScreenProps} from '@react-navigation/core';

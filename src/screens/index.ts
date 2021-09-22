@@ -21,3 +21,4 @@ export * from './ListWalmur';
 export * from './DetailWalmur';
 export * from './ListMaster';
 export * from './Laporan';
+export * from './RiwayatPembayaran';

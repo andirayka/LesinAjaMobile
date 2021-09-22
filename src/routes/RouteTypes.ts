@@ -15,6 +15,7 @@ export type AdminDrawerParamList = {
   ListWalmur: undefined;
   ListMaster: undefined;
   Laporan: undefined;
+  RiwayatPembayaran: undefined;
 };
 
 export type AppStackParamList = {
