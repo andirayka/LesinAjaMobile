@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Header} from '@components';
 import {color, dimens} from '@constants';
-import {Controller, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
   StatusBar,
@@ -9,7 +8,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Button, Card, DataTable, Text} from 'react-native-paper';
+import {Card, DataTable} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AdminDrawerParamList, AppStackParamList} from '@routes/RouteTypes';
 import {CompositeScreenProps} from '@react-navigation/core';
@@ -37,7 +36,7 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
       keterangan: '5',
     },
     {
-      nama: 'Instagram inst ',
+      nama: 'Instagram',
       efektivitas: '10%',
       keterangan: '5',
     },
@@ -65,14 +64,14 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
             <ScrollView horizontal>
               <DataTable>
                 <DataTable.Header>
-                  <DataTable.Title style={{minWidth: 100}}>
+                  <DataTable.Title style={styles.dataCell}>
                     Sosial Media
                   </DataTable.Title>
-                  <DataTable.Title style={{minWidth: 100}}>
+                  <DataTable.Title style={styles.dataCell}>
                     Efektivitas
                   </DataTable.Title>
-                  <DataTable.Title style={{minWidth: 100}}>
-                    Jumlah Wali Murid murid murid
+                  <DataTable.Title style={styles.dataCell}>
+                    Jumlah Wali Murid
                   </DataTable.Title>
                 </DataTable.Header>
                 {socialMedia.map(item => {
@@ -80,9 +79,6 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
                 })}
               </DataTable>
             </ScrollView>
-          </Card>
-          <Card style={{marginTop: 500}}>
-            <Card.Title title="ji" />
           </Card>
         </View>
       </ScrollView>
@@ -93,11 +89,11 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
 const SocialMediaRow: FC<{item: SocialMediaType}> = ({item}) => {
   return (
     <DataTable.Row>
-      <DataTable.Cell style={{minWidth: 100}}>{item.nama}</DataTable.Cell>
-      <DataTable.Cell style={{minWidth: 100}}>
+      <DataTable.Cell style={styles.dataCell}>{item.nama}</DataTable.Cell>
+      <DataTable.Cell style={styles.dataCell}>
         {item.efektivitas}
       </DataTable.Cell>
-      <DataTable.Cell style={{minWidth: 100}}>{item.keterangan}</DataTable.Cell>
+      <DataTable.Cell style={styles.dataCell}>{item.keterangan}</DataTable.Cell>
     </DataTable.Row>
   );
 };
@@ -106,5 +102,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: color.bg_grey,
     flex: 1,
+  },
+  dataCell: {
+    minWidth: 100,
   },
 });

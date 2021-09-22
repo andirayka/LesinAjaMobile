@@ -1,12 +1,6 @@
 import React, {FC} from 'react';
-import {
-  ButtonFormSubmit,
-  Header,
-  InputChoice,
-  InputRadio,
-  InputText,
-} from '@components';
-import {color, dimens, listJenjangKelas} from '@constants';
+import {ButtonFormSubmit, Header, InputChoice, InputText} from '@components';
+import {color, dimens} from '@constants';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {
   SafeAreaView,

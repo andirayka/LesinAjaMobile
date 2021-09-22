@@ -60,14 +60,14 @@ export const AdminDrawer = () => {
         }}
       />
       <DrawerContainer.Screen
-        name="Pilihan Les"
+        name="PilihanLes"
         component={Les}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="school" size={26} />,
         }}
       />
       <DrawerContainer.Screen
-        name="Riwayat Pembayaran"
+        name="RiwayatPembayaran"
         component={Les}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="wallet" size={26} />,
@@ -80,9 +80,6 @@ export const AdminDrawer = () => {
           drawerIcon: () => (
             <MaterialCommunityIcons name="file-document" size={26} />
           ),
-          drawerItemStyle: {
-            marginBottom: 300,
-          },
         }}
       />
     </DrawerContainer.Navigator>
@@ -93,17 +90,19 @@ const CustomDrawerContent = (props: any) => {
   const {logout} = useContext(AuthContext);
 
   return (
-    <DrawerContentScrollView {...props}>
-      <Title
-        style={{marginLeft: dimens.small_10, marginBottom: dimens.small_10}}>
-        Halo Admin
-      </Title>
-      <DrawerItemList {...props} />
+    <>
+      <DrawerContentScrollView {...props}>
+        <Title
+          style={{marginLeft: dimens.small_10, marginBottom: dimens.small_10}}>
+          Halo Admin
+        </Title>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
       <DrawerItem
         label="Keluar"
         onPress={logout}
         icon={() => <MaterialCommunityIcons name="logout" size={26} />}
       />
-    </DrawerContentScrollView>
+    </>
   );
 };
