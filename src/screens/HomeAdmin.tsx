@@ -72,7 +72,7 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
                     Efektivitas
                   </DataTable.Title>
                   <DataTable.Title style={{minWidth: 100}}>
-                    Jumlah Wali Murid murid murid
+                    Jumlah Wali murid
                   </DataTable.Title>
                 </DataTable.Header>
                 {socialMedia.map(item => {
@@ -81,9 +81,9 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
               </DataTable>
             </ScrollView>
           </Card>
-          <Card style={{marginTop: 500}}>
+          {/* <Card style={{marginTop: 500}}>
             <Card.Title title="ji" />
-          </Card>
+          </Card> */}
         </View>
       </ScrollView>
     </SafeAreaView>

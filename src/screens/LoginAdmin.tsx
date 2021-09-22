@@ -22,11 +22,10 @@ export const LoginAdmin: FC = () => {
   const {setUserRole} = useContext(AuthContext);
 
   const onSubmit: SubmitHandler<FormDataType> = async data => {
-    // const {success} = await apiPost({url: 'auth/admin/login', payload: data});
-    // if (success) {
-    //   alert('Login admin sukses');
-    // }
-    setUserRole('admin', true);
+    const {success} = await apiPost({url: 'auth/admin/login', payload: data});
+    if (success) {
+      setUserRole('admin', true);
+    }
   };
 
   return (
@@ -61,7 +60,7 @@ export const LoginAdmin: FC = () => {
             />
           )}
           name="email"
-          defaultValue={''}
+          defaultValue={'admin@lesinaja.com'}
         />
         {/* Password */}
         <Controller
@@ -80,7 +79,7 @@ export const LoginAdmin: FC = () => {
             />
           )}
           name="password"
-          defaultValue={''}
+          defaultValue={'adminlesinajajayaluarbiasa'}
         />
       </View>
       {/* Submit button */}
