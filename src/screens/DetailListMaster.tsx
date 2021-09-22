@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Header, OneLineInfo} from '@components';
 import {color, dimens} from '@constants';
 import {
@@ -8,15 +8,16 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Card, DataTable, IconButton, Text} from 'react-native-paper';
+import {Card, DataTable, IconButton, Text, Button} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
 type ScreenProps = StackScreenProps<AppStackParamList, 'DetailListMaster'>;
+
 export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
   const {detailType}: any = route.params;
 
-  const data = {
+  const data: any = {
     jenjangkelas: [
       {
         item: 'TK A',
@@ -54,31 +55,31 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
     paket: [
       {
         item: 'Paket 1',
-        jumlahPertemuan: 4,
+        jumlahPertemuan: '4',
       },
       {
         item: 'Paket 2',
-        jumlahPertemuan: 8,
+        jumlahPertemuan: '8',
       },
       {
         item: 'Paket 3',
-        jumlahPertemuan: 12,
+        jumlahPertemuan: '9',
       },
     ],
     wilayah: [
       {
         item: 'Wilayah 1',
-        biaya: 230000,
+        biaya: '230000',
         wilayah: ['jawa timur', 'jawa tengah', 'jawa barat'],
       },
       {
         item: 'Wilayah 2',
-        biaya: 250000,
+        biaya: '250000',
         wilayah: ['jakarta', 'banten', 'serang'],
       },
       {
         item: 'Wilayah 3',
-        biaya: 200000,
+        biaya: '200000',
         wilayah: ['bali', 'madura', 'lombok', 'surakarta'],
       },
     ],
@@ -95,6 +96,16 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
           {detailType == 'Wilayah' && (
             <OneLineInfo info="Geser tabel ke kanan untuk melihat data lebih lengkap" />
           )}
+          <Button
+            mode="contained"
+            style={{marginTop: dimens.standard}}
+            onPress={() =>
+              navigation.navigate<any>('EditListMaster', {
+                detailType: detailType,
+              })
+            }>
+            Tambah Data
+          </Button>
           <Card style={{marginTop: dimens.standard}}>
             <ScrollView horizontal>
               <DataTable>
@@ -102,6 +113,11 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
                   <DataTable.Title style={styles.tableCell}>
                     Item
                   </DataTable.Title>
+                  {detailType == 'Paket' && (
+                    <DataTable.Title style={styles.tableCell}>
+                      Jumlah Pertemuan
+                    </DataTable.Title>
+                  )}
                   {detailType == 'Wilayah' && (
                     <>
                       <DataTable.Title style={styles.tableCell}>
@@ -112,17 +128,23 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
                       </DataTable.Title>
                     </>
                   )}
-                  <DataTable.Title style={styles.actionCell}>
+                  <DataTable.Title style={styles.wideTableCell}>
                     Aksi
                   </DataTable.Title>
                 </DataTable.Header>
                 {data[detailType.replace(/\s+/g, '').toLowerCase()].map(
                   item => {
                     return (
-                      <SocialMediaRow
+                      <ItemRow
                         key={item.item}
                         item={item}
                         itemType={detailType}
+                        onPress={() =>
+                          navigation.navigate<any>('EditListMaster', {
+                            detailType: detailType,
+                            data: item,
+                          })
+                        }
                       />
                     );
                   },
@@ -130,22 +152,25 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
               </DataTable>
             </ScrollView>
           </Card>
-          <Card style={{marginTop: 500}}>
-            <Card.Title title="ji" />
-          </Card>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const SocialMediaRow: FC<{item: any; itemType: string}> = ({
+const ItemRow: FC<{item: any; itemType: string; onPress: () => void}> = ({
   item,
   itemType,
+  onPress,
 }) => {
   return (
     <DataTable.Row>
       <DataTable.Cell style={styles.tableCell}>{item.item}</DataTable.Cell>
+      {itemType == 'Paket' && (
+        <DataTable.Cell style={styles.tableCell}>
+          {item.jumlahPertemuan}
+        </DataTable.Cell>
+      )}
       {itemType == 'Wilayah' && (
         <>
           <DataTable.Cell style={styles.tableCell}>{item.biaya}</DataTable.Cell>
@@ -156,8 +181,8 @@ const SocialMediaRow: FC<{item: any; itemType: string}> = ({
           </DataTable.Cell>
         </>
       )}
-      <DataTable.Cell style={styles.actionCell}>
-        <IconButton icon="pencil" size={30} onPress={() => {}} />
+      <DataTable.Cell style={styles.wideTableCell}>
+        <IconButton icon="pencil" size={30} onPress={onPress} />
         <IconButton icon="delete" size={30} onPress={() => {}} />
       </DataTable.Cell>
     </DataTable.Row>
@@ -181,8 +206,5 @@ const styles = StyleSheet.create({
   wideTableCell: {
     minWidth: 300,
     marginRight: 10,
-  },
-  actionCell: {
-    minWidth: 300,
   },
 });

@@ -13,6 +13,7 @@ import {
   DetailLowongan,
   DetailWalmur,
   DetailListMaster,
+  EditListMaster,
 } from '@screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -70,6 +71,7 @@ const AppRouter: FC = () => {
               name="DetailListMaster"
               component={DetailListMaster}
             />
+            <AppStack.Screen name="EditListMaster" component={EditListMaster} />
           </>
         )}
         {/* Parent Stack */}

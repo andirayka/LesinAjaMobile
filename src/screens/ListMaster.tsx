@@ -6,7 +6,7 @@ import {AdminDrawerParamList, AppStackParamList} from '@routes/RouteTypes';
 import {StackScreenProps} from '@react-navigation/stack';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {MaterialBottomTabScreenProps} from '@react-navigation/material-bottom-tabs';
-import {Card, Button} from 'react-native-paper';
+import {Card} from 'react-native-paper';
 
 type ScreenProps = CompositeScreenProps<
   MaterialBottomTabScreenProps<AdminDrawerParamList, 'ListMaster'>,

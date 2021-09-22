@@ -32,4 +32,5 @@ export type AppStackParamList = {
   DetailLesTutor: undefined;
   DetailWalmur: undefined;
   DetailListMaster: undefined;
+  EditListMaster: undefined;
 };
