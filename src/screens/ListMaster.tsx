@@ -30,7 +30,7 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         <Card
           style={styles.card}
           onPress={() =>
-            navigation.navigate('DetailListMaster', {
+            navigation.navigate<any>('DetailListMaster', {
               detailType: 'Jenjang Kelas',
             })
           }>
@@ -43,7 +43,7 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         <Card
           style={styles.card}
           onPress={() =>
-            navigation.navigate('DetailListMaster', {detailType: 'Mapel'})
+            navigation.navigate<any>('DetailListMaster', {detailType: 'Mapel'})
           }>
           <Card.Title
             title="Master Mapel"
@@ -54,7 +54,7 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         <Card
           style={styles.card}
           onPress={() =>
-            navigation.navigate('DetailListMaster', {detailType: 'Paket'})
+            navigation.navigate<any>('DetailListMaster', {detailType: 'Paket'})
           }>
           <Card.Title
             title="Master Paket"
@@ -65,7 +65,9 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
         <Card
           style={styles.card}
           onPress={() =>
-            navigation.navigate('DetailListMaster', {detailType: 'Wilayah'})
+            navigation.navigate<any>('DetailListMaster', {
+              detailType: 'Wilayah',
+            })
           }>
           <Card.Title
             title="Master Wilayah"
@@ -90,6 +92,5 @@ const styles = StyleSheet.create({
   },
   card: {
     marginTop: dimens.standard,
-    paddingVertical: 20,
   },
 });

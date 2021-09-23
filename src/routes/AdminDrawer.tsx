@@ -5,7 +5,14 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import {HomeAdmin, Les, ListMaster, ListTutor, ListWalmur} from '@screens';
+import {
+  HomeAdmin,
+  Les,
+  ListLes,
+  ListMaster,
+  ListTutor,
+  ListWalmur,
+} from '@screens';
 import {AdminDrawerParamList} from './RouteTypes';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Title} from 'react-native-paper';
@@ -60,10 +67,11 @@ export const AdminDrawer = () => {
         }}
       />
       <DrawerContainer.Screen
-        name="PilihanLes"
-        component={Les}
+        name="ListLes"
+        component={ListLes}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="school" size={26} />,
+          drawerLabel: 'Daftar Les',
         }}
       />
       <DrawerContainer.Screen

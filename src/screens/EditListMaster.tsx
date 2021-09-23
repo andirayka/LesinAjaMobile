@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {ButtonFormSubmit, Header, InputChoice, InputText} from '@components';
-import {color, dimens} from '@constants';
+import {color, dimens, listJenjangKelas} from '@constants';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {
   SafeAreaView,
@@ -57,7 +57,7 @@ export const EditListMaster: FC<ScreenProps> = ({
               <InputText
                 autoCapitalize="words"
                 placeholder="Masukkan nama item"
-                label="Nama"
+                label="Item"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -114,26 +114,6 @@ export const EditListMaster: FC<ScreenProps> = ({
           )}
 
           {/* Wilayah */}
-          {detailType == 'Wilayah' && (
-            <Controller
-              control={control}
-              rules={{required: true}}
-              render={({field: {onChange, onBlur, value}}) => (
-                <InputText
-                  autoCapitalize="words"
-                  placeholder="Masukkan wilayah"
-                  label="Wilayah"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  error={!!errors.wilayah}
-                  errorMessage="Wilayah harus diisi"
-                />
-              )}
-              name="wilayah"
-              defaultValue={data && data.wilayah}
-            />
-          )}
         </View>
       </ScrollView>
 

@@ -96,6 +96,7 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
           {detailType == 'Wilayah' && (
             <OneLineInfo info="Geser tabel ke kanan untuk melihat data lebih lengkap" />
           )}
+
           <Button
             mode="contained"
             style={{marginTop: dimens.standard}}
