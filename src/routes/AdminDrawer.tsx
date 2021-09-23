@@ -12,6 +12,8 @@ import {
   ListMaster,
   ListTutor,
   ListWalmur,
+  Laporan,
+  RiwayatPembayaran,
 } from '@screens';
 import {AdminDrawerParamList} from './RouteTypes';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -76,14 +78,14 @@ export const AdminDrawer = () => {
       />
       <DrawerContainer.Screen
         name="RiwayatPembayaran"
-        component={Les}
+        component={RiwayatPembayaran}
         options={{
           drawerIcon: () => <MaterialCommunityIcons name="wallet" size={26} />,
         }}
       />
       <DrawerContainer.Screen
         name="Laporan"
-        component={Les}
+        component={Laporan}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="file-document" size={26} />

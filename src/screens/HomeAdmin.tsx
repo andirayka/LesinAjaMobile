@@ -71,7 +71,7 @@ export const HomeAdmin: FC<ScreenProps> = ({navigation}) => {
                     Efektivitas
                   </DataTable.Title>
                   <DataTable.Title style={styles.dataCell}>
-                    Jumlah Wali Murid
+                    Jumlah Wali murid
                   </DataTable.Title>
                 </DataTable.Header>
                 {socialMedia.map(item => {

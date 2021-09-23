@@ -23,3 +23,5 @@ export * from './ListMaster';
 export * from './DetailListMaster';
 export * from './EditListMaster';
 export * from './ListLes';
+export * from './Laporan';
+export * from './RiwayatPembayaran';
