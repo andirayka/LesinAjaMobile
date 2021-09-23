@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Header, OneLineInfo} from '@components';
+import {Header, OneLineInfo, FABList, Gap} from '@components';
 import {color, dimens} from '@constants';
 import {
   SafeAreaView,
@@ -8,7 +8,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Card, DataTable, IconButton, Text, Button} from 'react-native-paper';
+import {Card, DataTable, IconButton, Text} from 'react-native-paper';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AppStackParamList} from '@routes/RouteTypes';
 
@@ -96,17 +96,6 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
           {detailType == 'Wilayah' && (
             <OneLineInfo info="Geser tabel ke kanan untuk melihat data lebih lengkap" />
           )}
-
-          <Button
-            mode="contained"
-            style={{marginTop: dimens.standard}}
-            onPress={() =>
-              navigation.navigate<any>('EditListMaster', {
-                detailType: detailType,
-              })
-            }>
-            Tambah Data
-          </Button>
           <Card style={{marginTop: dimens.standard}}>
             <ScrollView horizontal>
               <DataTable>
@@ -134,10 +123,10 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
                   </DataTable.Title>
                 </DataTable.Header>
                 {data[detailType.replace(/\s+/g, '').toLowerCase()].map(
-                  item => {
+                  (item: {item: any}, index: number) => {
                     return (
                       <ItemRow
-                        key={item.item}
+                        key={index}
                         item={item}
                         itemType={detailType}
                         onPress={() =>
@@ -154,7 +143,18 @@ export const DetailListMaster: FC<ScreenProps> = ({route, navigation}) => {
             </ScrollView>
           </Card>
         </View>
+        <Gap y={72} />
       </ScrollView>
+
+      {/* Add button */}
+      <FABList
+        label="Tambah Data"
+        onPress={() =>
+          navigation.navigate<any>('EditListMaster', {
+            detailType: detailType,
+          })
+        }
+      />
     </SafeAreaView>
   );
 };
@@ -176,8 +176,8 @@ const ItemRow: FC<{item: any; itemType: string; onPress: () => void}> = ({
         <>
           <DataTable.Cell style={styles.tableCell}>{item.biaya}</DataTable.Cell>
           <DataTable.Cell style={styles.wideTableCell}>
-            {item.wilayah.map(item => {
-              return <Text key={item}>{`${item}, `}</Text>;
+            {item.wilayah.map((item: {item: any}, index: number) => {
+              return <Text key={index}>{`${item}, `}</Text>;
             })}
           </DataTable.Cell>
         </>

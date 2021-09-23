@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Header, OneLineInfo, CardKeyValue} from '@components';
+import {Header, OneLineInfo, CardKeyValue, FABList, Gap} from '@components';
 import {color, dimens} from '@constants';
 import {SafeAreaView, StatusBar, StyleSheet, ScrollView} from 'react-native';
 import {AdminDrawerParamList, AppStackParamList} from '@routes/RouteTypes';
@@ -73,13 +73,25 @@ export const ListLes: FC<ScreenProps> = ({navigation}) => {
                 <CardKeyValue keyName="Gaji Tutor" value={item.gajiTutor} />
               </Card.Content>
               <Card.Actions>
-                <Button onPress={() => {}}>Edit</Button>
+                <Button
+                  onPress={() =>
+                    navigation.navigate<any>('EditListLes', {data: item})
+                  }>
+                  Edit
+                </Button>
                 <Button onPress={() => {}}>Hapus</Button>
               </Card.Actions>
             </Card>
           );
         })}
+        <Gap y={72} />
       </ScrollView>
+
+      {/* Add button */}
+      <FABList
+        label="Tambah Data"
+        onPress={() => navigation.navigate<any>('EditListLes', {data: null})}
+      />
     </SafeAreaView>
   );
 };

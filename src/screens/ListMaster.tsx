@@ -18,12 +18,7 @@ export const ListMaster: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header
-        noBackButton
-        withFilter
-        title="Daftar Master"
-        onPressFilter={() => {}}
-      />
+      <Header noBackButton title="Daftar Master" onPressFilter={() => {}} />
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <OneLineInfo info="Klik item untuk melihat detail" />

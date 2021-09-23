@@ -59,7 +59,7 @@ export const Laporan: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Laporan Keuangan" withFilter />
+      <Header title="Laporan Keuangan" withFilter noBackButton />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>

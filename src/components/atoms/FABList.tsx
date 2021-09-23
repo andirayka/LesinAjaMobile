@@ -1,4 +1,4 @@
-import {dimens} from '@constants';
+import {dimens, color} from '@constants';
 import React, {FC} from 'react';
 import {FAB} from 'react-native-paper';
 
@@ -14,6 +14,7 @@ export const FABList: FC<Props> = ({label, onPress}) => {
         margin: dimens.large_26,
         right: 0,
         bottom: 0,
+        backgroundColor: color.green_500,
       }}
       color="black"
       label={label}

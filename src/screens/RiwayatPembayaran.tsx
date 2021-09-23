@@ -32,7 +32,7 @@ export const RiwayatPembayaran: FC<ScreenProps> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={color.bg_grey} barStyle="dark-content" />
 
-      <Header title="Riwayat Pembayaran" />
+      <Header title="Riwayat Pembayaran" noBackButton />
 
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, padding: dimens.standard}}>
